@@ -1,0 +1,11 @@
+useDynLib(lmmprobe, .registration=TRUE)
+importFrom(Rcpp, evalCpp)
+importFrom("stats", "cor", "density", "dnorm", "dt", "influence", "lm", "p.adjust", "pnorm", "predict", "pt", "qnorm", "qt", "quantile", "smooth.spline", "var", "vcov", "pchisq", "approxfun")
+importFrom("utils", "tail")
+importFrom("snow", "setDefaultClusterOptions")
+import(snowfall)
+import(lme4)
+import(tidyr)
+## export all regularly named functions
+## (but allow for private functions whose name starts with a dot).name <- function(...)
+exportPattern("^[[:alpha:]]+")
