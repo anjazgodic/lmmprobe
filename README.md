@@ -1,6 +1,8 @@
-# lmmprobe
-This is a package to perform sparse high-dimensional linear mixed modeling based on a partitioned empirical Bayes ECM algorithm. Please refer to the package manual for an example. 
+# LMM-PROBE
+This is a package to perform sparse high-dimensional linear mixed modeling based on a partitioned empirical Bayes ECM algorithm. 
+Please refer to the package manual for more details on the lmmprobe function.  
 
+To install the package, please follow the code snippet below: 
 ```
 library(devtools)
 install_github("anjazgodic/lmmprobe")
