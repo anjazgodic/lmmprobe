@@ -12,7 +12,7 @@ Here is an example for conducting analysis using LMM-PROBE:
 ```
 library(lmmprobe)
 data(SLE)
- ep <- 0.05
+ep <- 0.05
 alpha <- 0.05
 Y = SLE$Y
 Z = SLE$Z
