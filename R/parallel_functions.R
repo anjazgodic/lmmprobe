@@ -1,15 +1,15 @@
 by_j_calc_part2_fun <- function(x, Tt_invR, Y_split, fit, intercept_split, W_ast_split, X_split) {
-  if(class(fit) %in% c("lmerMod", "lme4") & is.null(X_split)){
+  if(any(class(fit) %in% c("lmerMod", "lme4")) & is.null(X_split)){
     return( Tt_invR[[x]] %*% (Y_split[[x]] - (fixef(fit)[1]*intercept_split[[x]]) - (fixef(fit)[2]*W_ast_split[[x]]) ) )
-  } 
-  if(class(fit) %in% c("lmerMod", "lme4") & !is.null(X_split)){
+  }
+  if(any(class(fit) %in% c("lmerMod", "lme4")) & !is.null(X_split)){
     return( Tt_invR[[x]] %*% (Y_split[[x]] - (fixef(fit)[1]*intercept_split[[x]]) - (fixef(fit)[2]*W_ast_split[[x]]) - (fixef(fit)[3]*X_split[[x]]) ) )
   }
-  if((!class(fit) %in% c("lmerMod", "lme4")) & is.null(X_split)){
+  if((!any(class(fit) %in% c("lmerMod", "lme4"))) & is.null(X_split)){
     return( Tt_invR[[x]] %*% (Y_split[[x]] - (fit[1]*intercept_split[[x]]) - (fit[2]*W_ast_split[[x]]) ) )
-  } 
-  if((!class(fit) %in% c("lmerMod", "lme4")) & !is.null(X_split)){
-    return( Tt_invR[[x]] %*% (Y_split[[x]] - (fit[1]*intercept_split[[x]]) - (fit[2]*W_ast_split[[x]]) - (fit[5]*X_split[[x]]) ) ) 
+  }
+  if((!any(class(fit) %in% c("lmerMod", "lme4"))) & !is.null(X_split)){
+    return( Tt_invR[[x]] %*% (Y_split[[x]] - (fit[1]*intercept_split[[x]]) - (fit[2]*W_ast_split[[x]]) - (fit[5]*X_split[[x]]) ) )
   }
 }
 
