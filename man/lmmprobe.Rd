@@ -8,7 +8,7 @@
 
 \item{Z}{A matrix containing the sparse fixed-effect predictors on which to apply the lmmprobe algorithm.}
 
-\item{V}{A matrix containing non-sparse predictors for the random effects. This matrix is currently only programmed for two scenarios. Scenario 1: only a random intercept, where V is a matrix with one column containing ID's. Scenario 2: a random intercept and a random slope, where V is a matrix with two columns. The first column is ID and the second column is a continuous variable (e.g. time) for which a random slope is to be estimated.}
+\item{V}{A matrix containing non-sparse predictors for the random effects. This matrix is currently only programmed for two scenarios. Scenario 1: only a random intercept, where V is a matrix with one column containing ID's and each unit has the same number of observations. Scenario 2: a random intercept and a random slope, where V is a matrix with two columns. The first column is ID and the second column is a continuous variable (e.g. time) for which a random slope is to be estimated. Each unit has the same number of observations.}
 
 \item{alpha}{Type I error; significance level.}
 
@@ -46,7 +46,7 @@ A list of the output of the lmmprobe function, including
 \code{random_slope} estimated random slope terms, if applicable.
 }
 \description{
-Sparse high-dimensional linear mixed modeling with PaRtitiOned empirical Bayes ECM (LMM-PROBE) algorithm. Currently, the package offers functionality for two scenarios. Scenario 1: only a random intercept; Scenario 2: a random intercept and a random slope. We are actively expanding the package for more flexibility and scenarios.
+Sparse high-dimensional linear mixed modeling with PaRtitiOned empirical Bayes ECM (LMM-PROBE) algorithm. Currently, the package offers functionality for two scenarios. Scenario 1: only a random intercept, each unit has the same number of observations; Scenario 2: a random intercept and a random slope, each unit has the same number of observations. We are actively expanding the package for more flexibility and scenarios.
 }
 \examples{
 library(lmmprobe)
@@ -59,5 +59,5 @@ V = SLE$V
 full_res <- lmmprobe(Y = Y, Z = Z, V = V, ep = ep, alpha = alpha)
 }
 \references{
-Zgodic, A. and McLain, A. C. (2023). Sparse high-dimensional linear mixed modeling with a partitioned empirical Bayes ECM algorithm. arXiv preprint arXiv:XXXX.XXXXX.
+Zgodic, A. and McLain, A. C. (2023). Sparse high-dimensional linear mixed modeling with a partitioned empirical Bayes ECM algorithm. arXiv preprint arXiv:2310.12285.
 }

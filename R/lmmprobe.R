@@ -1,10 +1,10 @@
 #' Sparse high-dimensional linear mixed modeling with PaRtitiOned empirical Bayes ECM (LMM-PROBE) algorithm. 
 #' 
 #' @name lmmprobe
-#' @description Sparse high-dimensional linear mixed modeling with PaRtitiOned empirical Bayes ECM (LMM-PROBE) algorithm. Currently, the package offers functionality for two scenarios. Scenario 1: only a random intercept; Scenario 2: a random intercept and a random slope. We are actively expanding the package for more flexibility and scenarios. 
+#' @description Sparse high-dimensional linear mixed modeling with PaRtitiOned empirical Bayes ECM (LMM-PROBE) algorithm. Currently, the package offers functionality for two scenarios. Scenario 1: only a random intercept, each unit has the same number of observations; Scenario 2: a random intercept and a random slope, each unit has the same number of observations. We are actively expanding the package for more flexibility and scenarios. 
 #' @param Y A matrix containing the outcome \code{Y}.
 #' @param Z A matrix containing the sparse fixed-effect predictors on which to apply the lmmprobe algorithm.
-#' @param V A matrix containing non-sparse predictors for the random effects. This matrix is currently only programmed for two scenarios. Scenario 1: only a random intercept, where V is a matrix with one column containing ID's. Scenario 2: a random intercept and a random slope, where V is a matrix with two columns. The first column is ID and the second column is a continuous variable (e.g. time) for which a random slope is to be estimated. 
+#' @param V A matrix containing non-sparse predictors for the random effects. This matrix is currently only programmed for two scenarios. Scenario 1: only a random intercept, where V is a matrix with one column containing ID's and each unit has the same number of observations. Scenario 2: a random intercept and a random slope, where V is a matrix with two columns. The first column is ID and the second column is a continuous variable (e.g. time) for which a random slope is to be estimated. Each unit has the same number of observations. 
 #' @param alpha Type I error; significance level.
 #' @param ep Value against which to compare convergence criterion, we recommend 0.05.
 #' @param B The number of groups to categorize estimated coefficients in to calculate correlation \eqn{\rho}. We recommend five.
@@ -39,7 +39,7 @@
 #' Z = SLE$Z
 #' V = SLE$V
 #' full_res <- lmmprobe(Y = Y, Z = Z, V = V, ep = ep, alpha = alpha)
-#' @references Zgodic, A. and McLain, A. C. (2023). Sparse high-dimensional linear mixed modeling with a partitioned empirical Bayes ECM algorithm. arXiv preprint arXiv:XXXX.XXXXX.
+#' @references Zgodic, A. and McLain, A. C. (2023). Sparse high-dimensional linear mixed modeling with a partitioned empirical Bayes ECM algorithm. arXiv preprint arXiv:2310.12285.
 #' @export
 
 utils::globalVariables(c(
