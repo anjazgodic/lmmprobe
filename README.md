@@ -12,10 +12,9 @@ Here is an example for conducting analysis using LMM-PROBE:
 ```
 library(lmmprobe)
 data(SLE)
-ep <- 0.05
-alpha <- 0.05
-Y = SLE$Y
-Z = SLE$Z
-V = SLE$V
-full_res <- lmmprobe(Y = Y, Z = Z, V = V, ep = ep, alpha = alpha)
+Y <- matrix(real_data[,"y"], ncol=1)
+Z <- real_data[,4:ncol(real_data)]
+V <- matrix(real_data[,"id"], ncol=1)
+ID_data <- as.numeric(as.character(real_data$id))
+full_res <- lmmprobe(Y = Y, Z = Z, V = V, ID_data = ID_data)
 ```

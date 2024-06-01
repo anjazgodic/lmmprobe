@@ -3,7 +3,7 @@ Type: Package
 Title: Sparse high-dimensional linear mixed modeling with a partitioned empirical Bayes ECM algorithm (LMM-PROBE). 
 Version: 1.0
 Date: 2023-09-07
-Author: Anja Zgodic, Alex McLain
+Author: Anja Zgodic, Alex McLain, Peter Olejua
 Maintainer: Anja Zgodic <azgodic@email.sc.edu>
 Description: Linear Mixed Modeling using the PROBE algorithm. This package is in development.
 License: GPL (>= 2)

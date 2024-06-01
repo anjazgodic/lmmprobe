@@ -52,7 +52,7 @@ calib_final <- function(W_ast, ID, W_ast_var, sigma2_lmm, Tt_invR_T, b_var, Tt_i
   if(number_re == 1){
     Xt_c <- as.matrix(cbind(intercept, W_ast, curr_T[,1]*b[,1]))
   } else{
-    Xt_c <- as.matrix(cbind(intercept, W_ast, curr_T[,1]*b[,1], curr_T[,2]*b[,2], X$x_adj))
+    Xt_c <- as.matrix(cbind(intercept, W_ast, curr_T[,1]*b[,1], curr_T[,2]*b[,2], X[,"x_adj"]))
   }
   
   XXt_c <- t(Xt_c)%*%Xt_c

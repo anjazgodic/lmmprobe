@@ -4,11 +4,21 @@
 \alias{lmmprobe}
 \title{Sparse high-dimensional linear mixed modeling with PaRtitiOned empirical Bayes ECM (LMM-PROBE) algorithm.}
 \arguments{
-\item{Y}{A matrix containing the outcome \code{Y}.}
+\item{Y}{A training-data matrix containing the outcome \code{Y}.}
 
-\item{Z}{A matrix containing the sparse fixed-effect predictors on which to apply the lmmprobe algorithm.}
+\item{Z}{A training-data matrix containing the sparse fixed-effect predictors on which to apply the lmmprobe algorithm. The first columns should be the "id" column.}
 
-\item{V}{A matrix containing non-sparse predictors for the random effects. This matrix is currently only programmed for two scenarios. Scenario 1: only a random intercept, where V is a matrix with one column containing ID's and each unit has the same number of observations. Scenario 2: a random intercept and a random slope, where V is a matrix with two columns. The first column is ID and the second column is a continuous variable (e.g. time) for which a random slope is to be estimated. Each unit has the same number of observations.}
+\item{V}{A training-data matrix containing non-sparse predictors for the random effects. This matrix is currently only programmed for two scenarios. Scenario 1: only a random intercept, where V is a matrix with one column containing ID's and each unit has the same number of observations. Scenario 2: a random intercept and a random slope, where V is a matrix with two columns. The first column is ID and the second column is a continuous variable (e.g. time) for which a random slope is to be estimated. Each unit has the same number of observations.}
+
+\item{ID_data}{A factor vector of IDs for subjects in the training set.}
+
+\item{Y_test}{A testing-data matrix containing the outcome \code{Y}. Default is NULL.}
+
+\item{Z_test}{A training-data matrix containing the sparse fixed-effect predictors on which to apply the lmmprobe algorithm. The first columns should be the "id" column. Default is NULL.}
+
+\item{V_test}{A training-data matrix containing non-sparse predictors for the random effects. This matrix is currently only programmed for two scenarios. Scenario 1: only a random intercept, where V is a matrix with one column containing ID's and each unit has the same number of observations. Scenario 2: a random intercept and a random slope, where V is a matrix with two columns. The first column is ID and the second column is a continuous variable (e.g. time) for which a random slope is to be estimated. Each unit has the same number of observations. Default is NULL.}
+
+\item{ID_test}{A factor vector of IDs for subjects in the testing set.}
 
 \item{alpha}{Type I error; significance level.}
 
@@ -25,6 +35,8 @@
 \item{LR}{A learning rate parameter \code{r}. Using zero corresponds to the implementation described in Zgodic et al.}
 
 \item{C}{A learning rate parameter \code{c}. Using one corresponds to the implementation described in Zgodic et al.}
+
+\item{sigma_init}{An initial value for the residual variance parameter. Default is NULL which corresponds to the sample variance of Y.}
 }
 \value{
 A list of the output of the lmmprobe function, including 
@@ -51,13 +63,12 @@ Sparse high-dimensional linear mixed modeling with PaRtitiOned empirical Bayes E
 \examples{
 library(lmmprobe)
 data(SLE)
-ep <- 0.05
-alpha <- 0.05
-Y = SLE$Y
-Z = SLE$Z
-V = SLE$V
-full_res <- lmmprobe(Y = Y, Z = Z, V = V, ep = ep, alpha = alpha)
+Y <- matrix(real_data[,"y"], ncol=1)
+Z <- real_data[,4:ncol(real_data)]
+V <- matrix(real_data[,"id"], ncol=1)
+ID_data <- as.numeric(as.character(real_data$id))
+full_res <- lmmprobe(Y = Y, Z = Z, V = V, ID_data = ID_data)
 }
 \references{
-Zgodic, A. and McLain, A. C. (2023). Sparse high-dimensional linear mixed modeling with a partitioned empirical Bayes ECM algorithm. arXiv preprint arXiv:2310.12285.
+Zgodic A, Bay R, Zhang J, Olejua P, and McLain AC (2023). Sparse high-dimensional linear mixed modeling with a partitioned empirical Bayes ECM algorithm. arXiv preprint arXiv:2310.12285.
 }
