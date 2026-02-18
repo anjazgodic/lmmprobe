@@ -1,0 +1,194 @@
+ℹ Loading lmmprobe
+Exports from /home/peter/OneDrive/RA/2026028_lmmprobe/lmmprobe/src/Col_sum.cpp:
+   List Col_sum(const arma::mat X)
+
+Exports from /home/peter/OneDrive/RA/2026028_lmmprobe/lmmprobe/src/LM_by_col_scenario2.cpp:
+   List LM_by_col(const arma::vec y, const arma::mat X, double sigma2_lmm)
+
+Exports from /home/peter/OneDrive/RA/2026028_lmmprobe/lmmprobe/src/LM_by_col_w_covs.cpp:
+   List LM_by_col_w_covs(const arma::vec y, const arma::mat X, const arma::colvec X_adj, double sigma2_lmm)
+
+Exports from /home/peter/OneDrive/RA/2026028_lmmprobe/lmmprobe/src/MVM.cpp:
+   List MVM(const arma::mat X, const arma::vec v)
+
+Exports from /home/peter/OneDrive/RA/2026028_lmmprobe/lmmprobe/src/Row_sum.cpp:
+   List Row_sum(const arma::mat X)
+
+Exports from /home/peter/OneDrive/RA/2026028_lmmprobe/lmmprobe/src/UNHIDEM_cpp0_5_scenario2.cpp:
+   List UNHIDEM_cpp0_5(const arma::vec y, const arma::mat Z, const arma::mat Vt, const arma::uvec rowind1, const arma::uvec rowind2, const arma::uvec colind1, const arma::uvec colind2, const arma::colvec Wt, const arma::colvec t_Dt2, const arma::colvec Vt1_2, const arma::colvec W_var, const arma::colvec delta, const arma::colvec beta_vec, double sigma2_lmm)
+
+Exports from /home/peter/OneDrive/RA/2026028_lmmprobe/lmmprobe/src/UNHIDEM_cpp0_5_w_covs.cpp:
+   List UNHIDEM_cpp0_5_w_covs(const arma::vec y, const arma::mat Z, const arma::mat Vt, const arma::colvec X_adj, const arma::uvec rowind1, const arma::uvec rowind2, const arma::uvec rowind3, const arma::uvec colind1, const arma::uvec colind2, const arma::uvec colind3, const arma::colvec Wt, const arma::colvec t_Dt2, const arma::colvec t_Dt3, const arma::colvec Vt1_2, const arma::colvec Vt1_3, const arma::colvec Vt2_3, const arma::colvec W_var, const arma::colvec delta, const arma::colvec beta_vec, double sigma2_lmm)
+
+/home/peter/OneDrive/RA/2026028_lmmprobe/lmmprobe/src/RcppExports.cpp updated.
+/home/peter/OneDrive/RA/2026028_lmmprobe/lmmprobe/R/RcppExports.R updated.
+ℹ Re-compiling lmmprobe (debug build)
+── R CMD INSTALL ───────────────────────────────────────────────────────────────
+* installing *source* package ‘lmmprobe’ ...
+** this is package ‘lmmprobe’ version ‘1.0.1’
+** using staged installation
+** libs
+using C++ compiler: ‘g++ (GCC) 15.2.1 20260209’
+using C++11
+g++ -std=gnu++11 -I"/usr/include/R/" -DNDEBUG  -I'/home/peter/R/x86_64-pc-linux-gnu-library/4.5/Rcpp/include' -I'/home/peter/R/x86_64-pc-linux-gnu-library/4.5/RcppArmadillo/include' -I/usr/local/include   -fopenmp  -fpic  -march=x86-64 -mtune=generic -O2 -pipe -fno-plt -fexceptions         -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security         -fstack-clash-protection -fcf-protection         -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wp,-D_GLIBCXX_ASSERTIONS -g -ffile-prefix-map=/build/r/src=/usr/src/debug/r -flto=auto -ffat-lto-objects  -UNDEBUG -Wall -pedantic -g -O0  -c Col_sum.cpp -o Col_sum.o
+In file included from /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/os_defines.h:39,
+                 from /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++config.h:727,
+                 from /usr/include/c++/15.2.1/bits/requires_hosted.h:31,
+                 from /usr/include/c++/15.2.1/fstream:40,
+                 from Col_sum.cpp:3:
+/usr/include/features.h:451:4: warning: #warning _FORTIFY_SOURCE requires compiling with optimization (-O) [-Wcpp]
+  451 | #  warning _FORTIFY_SOURCE requires compiling with optimization (-O)
+      |    ^~~~~~~
+In file included from /home/peter/R/x86_64-pc-linux-gnu-library/4.5/RcppArmadillo/include/RcppArmadillo.h:29,
+                 from Col_sum.cpp:5:
+/home/peter/R/x86_64-pc-linux-gnu-library/4.5/RcppArmadillo/include/RcppArmadillo/version/arma.h:66:199: note: ‘#pragma message: Using fallback compilation with Armadillo 14.6.3. Please consider defining -DARMA_USE_CURRENT and also removing C++11 compilation directive. See GitHub issue #475 for more.’
+   66 |         #pragma message("Using fallback compilation with Armadillo 14.6.3. Please consider defining -DARMA_USE_CURRENT and also removing C++11 compilation directive. See GitHub issue #475 for more.")
+      |                                                                                                                                                                                                       ^
+g++ -std=gnu++11 -I"/usr/include/R/" -DNDEBUG  -I'/home/peter/R/x86_64-pc-linux-gnu-library/4.5/Rcpp/include' -I'/home/peter/R/x86_64-pc-linux-gnu-library/4.5/RcppArmadillo/include' -I/usr/local/include   -fopenmp  -fpic  -march=x86-64 -mtune=generic -O2 -pipe -fno-plt -fexceptions         -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security         -fstack-clash-protection -fcf-protection         -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wp,-D_GLIBCXX_ASSERTIONS -g -ffile-prefix-map=/build/r/src=/usr/src/debug/r -flto=auto -ffat-lto-objects  -UNDEBUG -Wall -pedantic -g -O0  -c LM_by_col_scenario2.cpp -o LM_by_col_scenario2.o
+In file included from /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/os_defines.h:39,
+                 from /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++config.h:727,
+                 from /usr/include/c++/15.2.1/bits/requires_hosted.h:31,
+                 from /usr/include/c++/15.2.1/fstream:40,
+                 from LM_by_col_scenario2.cpp:3:
+/usr/include/features.h:451:4: warning: #warning _FORTIFY_SOURCE requires compiling with optimization (-O) [-Wcpp]
+  451 | #  warning _FORTIFY_SOURCE requires compiling with optimization (-O)
+      |    ^~~~~~~
+In file included from /home/peter/R/x86_64-pc-linux-gnu-library/4.5/RcppArmadillo/include/RcppArmadillo.h:29,
+                 from LM_by_col_scenario2.cpp:5:
+/home/peter/R/x86_64-pc-linux-gnu-library/4.5/RcppArmadillo/include/RcppArmadillo/version/arma.h:66:199: note: ‘#pragma message: Using fallback compilation with Armadillo 14.6.3. Please consider defining -DARMA_USE_CURRENT and also removing C++11 compilation directive. See GitHub issue #475 for more.’
+   66 |         #pragma message("Using fallback compilation with Armadillo 14.6.3. Please consider defining -DARMA_USE_CURRENT and also removing C++11 compilation directive. See GitHub issue #475 for more.")
+      |                                                                                                                                                                                                       ^
+g++ -std=gnu++11 -I"/usr/include/R/" -DNDEBUG  -I'/home/peter/R/x86_64-pc-linux-gnu-library/4.5/Rcpp/include' -I'/home/peter/R/x86_64-pc-linux-gnu-library/4.5/RcppArmadillo/include' -I/usr/local/include   -fopenmp  -fpic  -march=x86-64 -mtune=generic -O2 -pipe -fno-plt -fexceptions         -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security         -fstack-clash-protection -fcf-protection         -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wp,-D_GLIBCXX_ASSERTIONS -g -ffile-prefix-map=/build/r/src=/usr/src/debug/r -flto=auto -ffat-lto-objects  -UNDEBUG -Wall -pedantic -g -O0  -c LM_by_col_w_covs.cpp -o LM_by_col_w_covs.o
+In file included from /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/os_defines.h:39,
+                 from /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++config.h:727,
+                 from /usr/include/c++/15.2.1/bits/requires_hosted.h:31,
+                 from /usr/include/c++/15.2.1/fstream:40,
+                 from LM_by_col_w_covs.cpp:3:
+/usr/include/features.h:451:4: warning: #warning _FORTIFY_SOURCE requires compiling with optimization (-O) [-Wcpp]
+  451 | #  warning _FORTIFY_SOURCE requires compiling with optimization (-O)
+      |    ^~~~~~~
+In file included from /home/peter/R/x86_64-pc-linux-gnu-library/4.5/RcppArmadillo/include/RcppArmadillo.h:29,
+                 from LM_by_col_w_covs.cpp:5:
+/home/peter/R/x86_64-pc-linux-gnu-library/4.5/RcppArmadillo/include/RcppArmadillo/version/arma.h:66:199: note: ‘#pragma message: Using fallback compilation with Armadillo 14.6.3. Please consider defining -DARMA_USE_CURRENT and also removing C++11 compilation directive. See GitHub issue #475 for more.’
+   66 |         #pragma message("Using fallback compilation with Armadillo 14.6.3. Please consider defining -DARMA_USE_CURRENT and also removing C++11 compilation directive. See GitHub issue #475 for more.")
+      |                                                                                                                                                                                                       ^
+g++ -std=gnu++11 -I"/usr/include/R/" -DNDEBUG  -I'/home/peter/R/x86_64-pc-linux-gnu-library/4.5/Rcpp/include' -I'/home/peter/R/x86_64-pc-linux-gnu-library/4.5/RcppArmadillo/include' -I/usr/local/include   -fopenmp  -fpic  -march=x86-64 -mtune=generic -O2 -pipe -fno-plt -fexceptions         -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security         -fstack-clash-protection -fcf-protection         -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wp,-D_GLIBCXX_ASSERTIONS -g -ffile-prefix-map=/build/r/src=/usr/src/debug/r -flto=auto -ffat-lto-objects  -UNDEBUG -Wall -pedantic -g -O0  -c MVM.cpp -o MVM.o
+In file included from /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/os_defines.h:39,
+                 from /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++config.h:727,
+                 from /usr/include/c++/15.2.1/bits/requires_hosted.h:31,
+                 from /usr/include/c++/15.2.1/fstream:40,
+                 from MVM.cpp:3:
+/usr/include/features.h:451:4: warning: #warning _FORTIFY_SOURCE requires compiling with optimization (-O) [-Wcpp]
+  451 | #  warning _FORTIFY_SOURCE requires compiling with optimization (-O)
+      |    ^~~~~~~
+In file included from /home/peter/R/x86_64-pc-linux-gnu-library/4.5/RcppArmadillo/include/RcppArmadillo.h:29,
+                 from MVM.cpp:5:
+/home/peter/R/x86_64-pc-linux-gnu-library/4.5/RcppArmadillo/include/RcppArmadillo/version/arma.h:66:199: note: ‘#pragma message: Using fallback compilation with Armadillo 14.6.3. Please consider defining -DARMA_USE_CURRENT and also removing C++11 compilation directive. See GitHub issue #475 for more.’
+   66 |         #pragma message("Using fallback compilation with Armadillo 14.6.3. Please consider defining -DARMA_USE_CURRENT and also removing C++11 compilation directive. See GitHub issue #475 for more.")
+      |                                                                                                                                                                                                       ^
+g++ -std=gnu++11 -I"/usr/include/R/" -DNDEBUG  -I'/home/peter/R/x86_64-pc-linux-gnu-library/4.5/Rcpp/include' -I'/home/peter/R/x86_64-pc-linux-gnu-library/4.5/RcppArmadillo/include' -I/usr/local/include   -fopenmp  -fpic  -march=x86-64 -mtune=generic -O2 -pipe -fno-plt -fexceptions         -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security         -fstack-clash-protection -fcf-protection         -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wp,-D_GLIBCXX_ASSERTIONS -g -ffile-prefix-map=/build/r/src=/usr/src/debug/r -flto=auto -ffat-lto-objects  -UNDEBUG -Wall -pedantic -g -O0  -c RcppExports.cpp -o RcppExports.o
+In file included from /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/os_defines.h:39,
+                 from /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++config.h:727,
+                 from /usr/include/c++/15.2.1/bits/requires_hosted.h:31,
+                 from /usr/include/c++/15.2.1/cmath:46,
+                 from /home/peter/R/x86_64-pc-linux-gnu-library/4.5/Rcpp/include/Rcpp/platform/compiler.h:37,
+                 from /home/peter/R/x86_64-pc-linux-gnu-library/4.5/Rcpp/include/Rcpp/r/headers.h:67,
+                 from /home/peter/R/x86_64-pc-linux-gnu-library/4.5/Rcpp/include/RcppCommon.h:30,
+                 from /home/peter/R/x86_64-pc-linux-gnu-library/4.5/RcppArmadillo/include/RcppArmadillo/interface/RcppArmadilloForward.h:26,
+                 from /home/peter/R/x86_64-pc-linux-gnu-library/4.5/RcppArmadillo/include/RcppArmadillo.h:32,
+                 from RcppExports.cpp:4:
+/usr/include/features.h:451:4: warning: #warning _FORTIFY_SOURCE requires compiling with optimization (-O) [-Wcpp]
+  451 | #  warning _FORTIFY_SOURCE requires compiling with optimization (-O)
+      |    ^~~~~~~
+In file included from /home/peter/R/x86_64-pc-linux-gnu-library/4.5/RcppArmadillo/include/RcppArmadillo.h:29:
+/home/peter/R/x86_64-pc-linux-gnu-library/4.5/RcppArmadillo/include/RcppArmadillo/version/arma.h:66:199: note: ‘#pragma message: Using fallback compilation with Armadillo 14.6.3. Please consider defining -DARMA_USE_CURRENT and also removing C++11 compilation directive. See GitHub issue #475 for more.’
+   66 |         #pragma message("Using fallback compilation with Armadillo 14.6.3. Please consider defining -DARMA_USE_CURRENT and also removing C++11 compilation directive. See GitHub issue #475 for more.")
+      |                                                                                                                                                                                                       ^
+g++ -std=gnu++11 -I"/usr/include/R/" -DNDEBUG  -I'/home/peter/R/x86_64-pc-linux-gnu-library/4.5/Rcpp/include' -I'/home/peter/R/x86_64-pc-linux-gnu-library/4.5/RcppArmadillo/include' -I/usr/local/include   -fopenmp  -fpic  -march=x86-64 -mtune=generic -O2 -pipe -fno-plt -fexceptions         -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security         -fstack-clash-protection -fcf-protection         -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wp,-D_GLIBCXX_ASSERTIONS -g -ffile-prefix-map=/build/r/src=/usr/src/debug/r -flto=auto -ffat-lto-objects  -UNDEBUG -Wall -pedantic -g -O0  -c Row_sum.cpp -o Row_sum.o
+In file included from /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/os_defines.h:39,
+                 from /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++config.h:727,
+                 from /usr/include/c++/15.2.1/bits/requires_hosted.h:31,
+                 from /usr/include/c++/15.2.1/fstream:40,
+                 from Row_sum.cpp:3:
+/usr/include/features.h:451:4: warning: #warning _FORTIFY_SOURCE requires compiling with optimization (-O) [-Wcpp]
+  451 | #  warning _FORTIFY_SOURCE requires compiling with optimization (-O)
+      |    ^~~~~~~
+In file included from /home/peter/R/x86_64-pc-linux-gnu-library/4.5/RcppArmadillo/include/RcppArmadillo.h:29,
+                 from Row_sum.cpp:5:
+/home/peter/R/x86_64-pc-linux-gnu-library/4.5/RcppArmadillo/include/RcppArmadillo/version/arma.h:66:199: note: ‘#pragma message: Using fallback compilation with Armadillo 14.6.3. Please consider defining -DARMA_USE_CURRENT and also removing C++11 compilation directive. See GitHub issue #475 for more.’
+   66 |         #pragma message("Using fallback compilation with Armadillo 14.6.3. Please consider defining -DARMA_USE_CURRENT and also removing C++11 compilation directive. See GitHub issue #475 for more.")
+      |                                                                                                                                                                                                       ^
+g++ -std=gnu++11 -I"/usr/include/R/" -DNDEBUG  -I'/home/peter/R/x86_64-pc-linux-gnu-library/4.5/Rcpp/include' -I'/home/peter/R/x86_64-pc-linux-gnu-library/4.5/RcppArmadillo/include' -I/usr/local/include   -fopenmp  -fpic  -march=x86-64 -mtune=generic -O2 -pipe -fno-plt -fexceptions         -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security         -fstack-clash-protection -fcf-protection         -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wp,-D_GLIBCXX_ASSERTIONS -g -ffile-prefix-map=/build/r/src=/usr/src/debug/r -flto=auto -ffat-lto-objects  -UNDEBUG -Wall -pedantic -g -O0  -c UNHIDEM_cpp0_5_scenario2.cpp -o UNHIDEM_cpp0_5_scenario2.o
+In file included from /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/os_defines.h:39,
+                 from /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++config.h:727,
+                 from /usr/include/c++/15.2.1/bits/requires_hosted.h:31,
+                 from /usr/include/c++/15.2.1/fstream:40,
+                 from UNHIDEM_cpp0_5_scenario2.cpp:3:
+/usr/include/features.h:451:4: warning: #warning _FORTIFY_SOURCE requires compiling with optimization (-O) [-Wcpp]
+  451 | #  warning _FORTIFY_SOURCE requires compiling with optimization (-O)
+      |    ^~~~~~~
+In file included from /home/peter/R/x86_64-pc-linux-gnu-library/4.5/RcppArmadillo/include/RcppArmadillo.h:29,
+                 from UNHIDEM_cpp0_5_scenario2.cpp:5:
+/home/peter/R/x86_64-pc-linux-gnu-library/4.5/RcppArmadillo/include/RcppArmadillo/version/arma.h:66:199: note: ‘#pragma message: Using fallback compilation with Armadillo 14.6.3. Please consider defining -DARMA_USE_CURRENT and also removing C++11 compilation directive. See GitHub issue #475 for more.’
+   66 |         #pragma message("Using fallback compilation with Armadillo 14.6.3. Please consider defining -DARMA_USE_CURRENT and also removing C++11 compilation directive. See GitHub issue #475 for more.")
+      |                                                                                                                                                                                                       ^
+g++ -std=gnu++11 -I"/usr/include/R/" -DNDEBUG  -I'/home/peter/R/x86_64-pc-linux-gnu-library/4.5/Rcpp/include' -I'/home/peter/R/x86_64-pc-linux-gnu-library/4.5/RcppArmadillo/include' -I/usr/local/include   -fopenmp  -fpic  -march=x86-64 -mtune=generic -O2 -pipe -fno-plt -fexceptions         -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security         -fstack-clash-protection -fcf-protection         -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wp,-D_GLIBCXX_ASSERTIONS -g -ffile-prefix-map=/build/r/src=/usr/src/debug/r -flto=auto -ffat-lto-objects  -UNDEBUG -Wall -pedantic -g -O0  -c UNHIDEM_cpp0_5_w_covs.cpp -o UNHIDEM_cpp0_5_w_covs.o
+In file included from /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/os_defines.h:39,
+                 from /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++config.h:727,
+                 from /usr/include/c++/15.2.1/bits/requires_hosted.h:31,
+                 from /usr/include/c++/15.2.1/fstream:40,
+                 from UNHIDEM_cpp0_5_w_covs.cpp:3:
+/usr/include/features.h:451:4: warning: #warning _FORTIFY_SOURCE requires compiling with optimization (-O) [-Wcpp]
+  451 | #  warning _FORTIFY_SOURCE requires compiling with optimization (-O)
+      |    ^~~~~~~
+In file included from /home/peter/R/x86_64-pc-linux-gnu-library/4.5/RcppArmadillo/include/RcppArmadillo.h:29,
+                 from UNHIDEM_cpp0_5_w_covs.cpp:5:
+/home/peter/R/x86_64-pc-linux-gnu-library/4.5/RcppArmadillo/include/RcppArmadillo/version/arma.h:66:199: note: ‘#pragma message: Using fallback compilation with Armadillo 14.6.3. Please consider defining -DARMA_USE_CURRENT and also removing C++11 compilation directive. See GitHub issue #475 for more.’
+   66 |         #pragma message("Using fallback compilation with Armadillo 14.6.3. Please consider defining -DARMA_USE_CURRENT and also removing C++11 compilation directive. See GitHub issue #475 for more.")
+      |                                                                                                                                                                                                       ^
+g++ -std=gnu++11 -shared -L/usr/lib64/R/lib -Wl,-O1 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,-z,pack-relative-relocs -flto=auto -o lmmprobe.so Col_sum.o LM_by_col_scenario2.o LM_by_col_w_covs.o MVM.o RcppExports.o Row_sum.o UNHIDEM_cpp0_5_scenario2.o UNHIDEM_cpp0_5_w_covs.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/usr/lib64/R/lib -lR
+installing to /tmp/RtmpT5YBDK/devtools_install_13c347d8b236/00LOCK-lmmprobe/00new/lmmprobe/libs
+** checking absolute paths in shared objects and dynamic libraries
+* DONE (lmmprobe)
+Loading required package: Rcpp
+Loading required package: tidyr
+Loading required package: lme4
+Loading required package: Matrix
+
+Attaching package: ‘Matrix’
+
+The following objects are masked from ‘package:tidyr’:
+
+    expand, pack, unpack
+
+Warning message:
+In loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]) :
+  there is no package called ‘snowfall’
+ℹ Testing lmmprobe
+✔ | F W  S  OK | Context
+
+⠏ |          0 | basic                                                          
+✔ |          1 | basic
+
+⠏ |          0 | lmmprobe                                                       
+✖ | 1        0 | lmmprobe
+────────────────────────────────────────────────────────────────────────────────
+Error ('test-lmmprobe.R:39:5'): lmmprobe runs on simple random intercept data
+Error in `sfLibrary(tidyr)`: could not find function "sfLibrary"
+Backtrace:
+    ▆
+ 1. └─lmmprobe::lmmprobe(...) at test-lmmprobe.R:39:5
+────────────────────────────────────────────────────────────────────────────────
+
+══ Results ═════════════════════════════════════════════════════════════════════
+── Failed tests ────────────────────────────────────────────────────────────────
+Error ('test-lmmprobe.R:39:5'): lmmprobe runs on simple random intercept data
+Error in `sfLibrary(tidyr)`: could not find function "sfLibrary"
+Backtrace:
+    ▆
+ 1. └─lmmprobe::lmmprobe(...) at test-lmmprobe.R:39:5
+
+[ FAIL 1 | WARN 0 | SKIP 0 | PASS 1 ]
+Warning message:
+In loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]) :
+  there is no package called ‘snowfall’

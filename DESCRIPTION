@@ -1,13 +1,16 @@
 Package: lmmprobe
 Type: Package
-Title: Sparse high-dimensional linear mixed modeling with a partitioned empirical Bayes ECM algorithm (LMM-PROBE). 
-Version: 1.0
-Date: 2023-09-07
+Title: Sparse High-Dimensional Linear Mixed Modeling with a Partitioned Empirical Bayes ECM Algorithm
+Version: 1.0.1
+Date: 2026-02-18
 Author: Anja Zgodic, Alex McLain, Peter Olejua
 Maintainer: Anja Zgodic <azgodic@email.sc.edu>
-Description: Linear Mixed Modeling using the PROBE algorithm. This package is in development.
+Description: Implements a partitioned Empirical Bayes ECM algorithm for sparse high-dimensional linear mixed modeling. The package provides efficient estimation and inference for mixed models with high-dimensional fixed effects.
 License: GPL (>= 2)
 Encoding: UTF-8
-RoxygenNote: 7.2.0
-Depends: Rcpp (>= 1.0.8.3), snow (>= 0.4-4), snowfall (>= 1.84-6.1), tidyr (>= 1.2.0), lme4 (>= 1.1-29)
+RoxygenNote: 7.3.3
+Depends: Rcpp (>= 1.0.8.3), tidyr (>= 1.2.0), lme4 (>= 1.1-29)
+Imports: future (>= 1.28.0), future.apply (>= 1.10.0)
 LinkingTo: Rcpp, RcppArmadillo
+Suggests: testthat (>= 3.0.0), knitr, rmarkdown, MASS
+VignetteBuilder: knitr
