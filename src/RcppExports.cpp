@@ -22,14 +22,105 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// Compute_Random_Effects
+List Compute_Random_Effects(const List& Tt_invR, const List& Tt_invR_T, const List& Y_split, const List& W_ast_split, const List& intercept_split, const Nullable<List>& X_split_opt, double sigma2_lmm, const arma::mat& inv_b_var, double coef_int, double coef_W, double coef_X, bool has_X, int n_subj);
+RcppExport SEXP _lmmprobe_Compute_Random_Effects(SEXP Tt_invRSEXP, SEXP Tt_invR_TSEXP, SEXP Y_splitSEXP, SEXP W_ast_splitSEXP, SEXP intercept_splitSEXP, SEXP X_split_optSEXP, SEXP sigma2_lmmSEXP, SEXP inv_b_varSEXP, SEXP coef_intSEXP, SEXP coef_WSEXP, SEXP coef_XSEXP, SEXP has_XSEXP, SEXP n_subjSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List& >::type Tt_invR(Tt_invRSEXP);
+    Rcpp::traits::input_parameter< const List& >::type Tt_invR_T(Tt_invR_TSEXP);
+    Rcpp::traits::input_parameter< const List& >::type Y_split(Y_splitSEXP);
+    Rcpp::traits::input_parameter< const List& >::type W_ast_split(W_ast_splitSEXP);
+    Rcpp::traits::input_parameter< const List& >::type intercept_split(intercept_splitSEXP);
+    Rcpp::traits::input_parameter< const Nullable<List>& >::type X_split_opt(X_split_optSEXP);
+    Rcpp::traits::input_parameter< double >::type sigma2_lmm(sigma2_lmmSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type inv_b_var(inv_b_varSEXP);
+    Rcpp::traits::input_parameter< double >::type coef_int(coef_intSEXP);
+    Rcpp::traits::input_parameter< double >::type coef_W(coef_WSEXP);
+    Rcpp::traits::input_parameter< double >::type coef_X(coef_XSEXP);
+    Rcpp::traits::input_parameter< bool >::type has_X(has_XSEXP);
+    Rcpp::traits::input_parameter< int >::type n_subj(n_subjSEXP);
+    rcpp_result_gen = Rcpp::wrap(Compute_Random_Effects(Tt_invR, Tt_invR_T, Y_split, W_ast_split, intercept_split, X_split_opt, sigma2_lmm, inv_b_var, coef_int, coef_W, coef_X, has_X, n_subj));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Compute_Posterior_Var
+List Compute_Posterior_Var(const List& Tt_invR_T, const List& b_vec, double sigma2_lmm, const arma::mat& inv_b_var, int n_subj);
+RcppExport SEXP _lmmprobe_Compute_Posterior_Var(SEXP Tt_invR_TSEXP, SEXP b_vecSEXP, SEXP sigma2_lmmSEXP, SEXP inv_b_varSEXP, SEXP n_subjSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List& >::type Tt_invR_T(Tt_invR_TSEXP);
+    Rcpp::traits::input_parameter< const List& >::type b_vec(b_vecSEXP);
+    Rcpp::traits::input_parameter< double >::type sigma2_lmm(sigma2_lmmSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type inv_b_var(inv_b_varSEXP);
+    Rcpp::traits::input_parameter< int >::type n_subj(n_subjSEXP);
+    rcpp_result_gen = Rcpp::wrap(Compute_Posterior_Var(Tt_invR_T, b_vec, sigma2_lmm, inv_b_var, n_subj));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Compute_Expectations
+List Compute_Expectations(const List& Tt_invR_T, double sigma2_lmm_value, const arma::mat& inv_b_var_value, const List& Tt_invR, const List& W_ast_var_split, const List& curr_T_split, const List& curr_T_split_t, const List& W_ast_split, const List& b_vec, int number_re, int n_subj);
+RcppExport SEXP _lmmprobe_Compute_Expectations(SEXP Tt_invR_TSEXP, SEXP sigma2_lmm_valueSEXP, SEXP inv_b_var_valueSEXP, SEXP Tt_invRSEXP, SEXP W_ast_var_splitSEXP, SEXP curr_T_splitSEXP, SEXP curr_T_split_tSEXP, SEXP W_ast_splitSEXP, SEXP b_vecSEXP, SEXP number_reSEXP, SEXP n_subjSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List& >::type Tt_invR_T(Tt_invR_TSEXP);
+    Rcpp::traits::input_parameter< double >::type sigma2_lmm_value(sigma2_lmm_valueSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type inv_b_var_value(inv_b_var_valueSEXP);
+    Rcpp::traits::input_parameter< const List& >::type Tt_invR(Tt_invRSEXP);
+    Rcpp::traits::input_parameter< const List& >::type W_ast_var_split(W_ast_var_splitSEXP);
+    Rcpp::traits::input_parameter< const List& >::type curr_T_split(curr_T_splitSEXP);
+    Rcpp::traits::input_parameter< const List& >::type curr_T_split_t(curr_T_split_tSEXP);
+    Rcpp::traits::input_parameter< const List& >::type W_ast_split(W_ast_splitSEXP);
+    Rcpp::traits::input_parameter< const List& >::type b_vec(b_vecSEXP);
+    Rcpp::traits::input_parameter< int >::type number_re(number_reSEXP);
+    Rcpp::traits::input_parameter< int >::type n_subj(n_subjSEXP);
+    rcpp_result_gen = Rcpp::wrap(Compute_Expectations(Tt_invR_T, sigma2_lmm_value, inv_b_var_value, Tt_invR, W_ast_var_split, curr_T_split, curr_T_split_t, W_ast_split, b_vec, number_re, n_subj));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Compute_Trace
+NumericVector Compute_Trace(const List& Tt_invR_T, double sigma2_lmm_value, const arma::mat& inv_b_var_value, const List& et_invR_e, int number_re, int n_subj);
+RcppExport SEXP _lmmprobe_Compute_Trace(SEXP Tt_invR_TSEXP, SEXP sigma2_lmm_valueSEXP, SEXP inv_b_var_valueSEXP, SEXP et_invR_eSEXP, SEXP number_reSEXP, SEXP n_subjSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List& >::type Tt_invR_T(Tt_invR_TSEXP);
+    Rcpp::traits::input_parameter< double >::type sigma2_lmm_value(sigma2_lmm_valueSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type inv_b_var_value(inv_b_var_valueSEXP);
+    Rcpp::traits::input_parameter< const List& >::type et_invR_e(et_invR_eSEXP);
+    Rcpp::traits::input_parameter< int >::type number_re(number_reSEXP);
+    Rcpp::traits::input_parameter< int >::type n_subj(n_subjSEXP);
+    rcpp_result_gen = Rcpp::wrap(Compute_Trace(Tt_invR_T, sigma2_lmm_value, inv_b_var_value, et_invR_e, number_re, n_subj));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Compute_Full_Vt
+arma::mat Compute_Full_Vt(const List& Vt_bb_vec, const List& Vt_Wb_vec, const List& curr_T_split, const arma::vec& W_ast_var, int number_re, int n_total);
+RcppExport SEXP _lmmprobe_Compute_Full_Vt(SEXP Vt_bb_vecSEXP, SEXP Vt_Wb_vecSEXP, SEXP curr_T_splitSEXP, SEXP W_ast_varSEXP, SEXP number_reSEXP, SEXP n_totalSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List& >::type Vt_bb_vec(Vt_bb_vecSEXP);
+    Rcpp::traits::input_parameter< const List& >::type Vt_Wb_vec(Vt_Wb_vecSEXP);
+    Rcpp::traits::input_parameter< const List& >::type curr_T_split(curr_T_splitSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type W_ast_var(W_ast_varSEXP);
+    Rcpp::traits::input_parameter< int >::type number_re(number_reSEXP);
+    Rcpp::traits::input_parameter< int >::type n_total(n_totalSEXP);
+    rcpp_result_gen = Rcpp::wrap(Compute_Full_Vt(Vt_bb_vec, Vt_Wb_vec, curr_T_split, W_ast_var, number_re, n_total));
+    return rcpp_result_gen;
+END_RCPP
+}
 // LM_by_col
-List LM_by_col(const arma::vec y, const arma::mat X, double sigma2_lmm);
+List LM_by_col(const arma::vec& y, const arma::mat& X, double sigma2_lmm);
 RcppExport SEXP _lmmprobe_LM_by_col(SEXP ySEXP, SEXP XSEXP, SEXP sigma2_lmmSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const arma::vec >::type y(ySEXP);
-    Rcpp::traits::input_parameter< const arma::mat >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type y(ySEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type X(XSEXP);
     Rcpp::traits::input_parameter< double >::type sigma2_lmm(sigma2_lmmSEXP);
     rcpp_result_gen = Rcpp::wrap(LM_by_col(y, X, sigma2_lmm));
     return rcpp_result_gen;
@@ -129,6 +220,11 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_lmmprobe_Col_sum", (DL_FUNC) &_lmmprobe_Col_sum, 1},
+    {"_lmmprobe_Compute_Random_Effects", (DL_FUNC) &_lmmprobe_Compute_Random_Effects, 13},
+    {"_lmmprobe_Compute_Posterior_Var", (DL_FUNC) &_lmmprobe_Compute_Posterior_Var, 5},
+    {"_lmmprobe_Compute_Expectations", (DL_FUNC) &_lmmprobe_Compute_Expectations, 11},
+    {"_lmmprobe_Compute_Trace", (DL_FUNC) &_lmmprobe_Compute_Trace, 6},
+    {"_lmmprobe_Compute_Full_Vt", (DL_FUNC) &_lmmprobe_Compute_Full_Vt, 6},
     {"_lmmprobe_LM_by_col", (DL_FUNC) &_lmmprobe_LM_by_col, 3},
     {"_lmmprobe_LM_by_col_w_covs", (DL_FUNC) &_lmmprobe_LM_by_col_w_covs, 4},
     {"_lmmprobe_MVM", (DL_FUNC) &_lmmprobe_MVM, 2},
