@@ -11,7 +11,7 @@ List UNHIDEM_cpp0_5(const arma::vec y, const arma::mat Z, const arma::mat Vt, co
   
   // Getting the dimensions and initializing outputs
   int n = Z.n_rows, d = Z.n_cols;
-  arma::mat coef_mat(d,4);
+  arma::mat coef_mat(d,4,arma::fill::zeros);
   arma::mat se(d,4,arma::fill::ones);
   arma::mat sig(d,1,arma::fill::ones);
   arma::mat like(d,1,arma::fill::ones);
