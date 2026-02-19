@@ -103,13 +103,20 @@ calib_final <- function(
     XXt_c[4, 3] <- sum(E_b1b2_c)
   }
 
-  XXt_c_inv <- solve(XXt_c)
-  c_coefs <- solve(XXt_c, crossprod(Xt_c, Y))
+  # Use Cholesky decomposition for better numerical stability and speed
+  # Since XXt_c is a crossproduct, it is symmetric and positive-definite
+  R_chol <- chol(XXt_c)
+  XXt_c_inv <- chol2inv(R_chol)
+  c_coefs <- backsolve(R_chol, forwardsolve(t(R_chol), crossprod(Xt_c, Y)))
 
   out <- list(
-    c_coefs = c_coefs, Xt_c = Xt_c, XXt_c_inv = XXt_c_inv,
-    Vt_bb_by_j_part = Vt_bb_by_j_part, cov_Wb1_c = cov_Wb1_c,
-    cov_b1b2_c = cov_b1b2_c, cov_Wb2_c = cov_Wb2_c
+    c_coefs = c_coefs,
+    Xt_c = Xt_c,
+    XXt_c_inv = XXt_c_inv,
+    Vt_bb_by_j_part = Vt_bb_by_j_part,
+    cov_Wb1_c = cov_Wb1_c,
+    cov_b1b2_c = cov_b1b2_c,
+    cov_Wb2_c = cov_Wb2_c
   )
 
   return(out)
