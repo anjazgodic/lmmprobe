@@ -117,7 +117,7 @@ lmmprobe <- function(
     StdErr <- T_vals <- beta_stderr <- rep(0, M)
 
   b_var <- b_var_value <- diag(1, number_re)
-  W_ast_store <- W_ast_var_store <- matrix(0, ncol = M, nrow = N)
+
   b_vec_out <- b2_vec_out <- matrix()
   b_vec <- b2_vec <- list()
 
@@ -293,16 +293,12 @@ lmmprobe <- function(
   )$lfdr
 
   ### We update W so that we can do the E-Step ####
-  W_ast_store <- MVM(as.matrix(Z), delta * beta_t)$Res
-  W_ast_store[is.nan(W_ast_store) | is.na(W_ast_store)] <- 0
-  W_ast <- c(Row_sum(as.matrix(W_ast_store))$Rowsum)
+  W_ast <- Fast_MVM(as.matrix(Z), delta * beta_t)
 
   ### We update Var W so that we can do the E-Step ####
   W_ast_var <- NULL
   if (!is.null(Z_2)) {
-    W_ast_var_store <- MVM(as.matrix(Z_2), (beta_tilde^2) * (delta * (1 - delta)))$Res
-    W_ast_var_store[is.nan(W_ast_var_store) | is.na(W_ast_var_store)] <- 0
-    W_ast_var <- c(Row_sum(as.matrix(W_ast_var_store))$Rowsum)
+    W_ast_var <- Fast_MVM(as.matrix(Z_2), (beta_tilde^2) * (delta * (1 - delta)))
   }
 
   ### We calculate b with lmer to start ####
@@ -421,12 +417,10 @@ lmmprobe <- function(
     #### Updating W, W2, b, b2 ####
     W_ast_var <- NULL
     if (!is.null(Z_2)) {
-      W_ast_var_store <- MVM(
+      W_ast_var <- Fast_MVM(
         as.matrix(Z_2),
-        (beta_tilde^2) * (delta * (1 - delta))
-      )$Res
-      W_ast_var_store[is.nan(W_ast_var_store) | is.na(W_ast_var_store)] <- 0
-      W_ast_var <- c(Row_sum(as.matrix(W_ast_var_store))$Rowsum)
+        (beta_t^2) * (delta * (1 - delta))
+      )
     }
   } # end of big if (sum(delta) == 0)
 
@@ -437,8 +431,9 @@ lmmprobe <- function(
   }
   if (try2 == 2) {
     conv <- 2
-    cat("Warning: loop completely recycled back to beta=delta=0 twice.
-        Optimization failed.\n")
+    warning(
+      "Loop completely recycled back to beta=delta=0 twice. Optimization failed."
+    )
   }
 
   # Iteration >=2 ####
@@ -560,16 +555,12 @@ lmmprobe <- function(
     )$lfdr
 
     ### We update W so that we can do the E-Step ####
-    W_ast_store <- MVM(as.matrix(Z), delta * beta_t)$Res
-    W_ast_store[is.nan(W_ast_store) | is.na(W_ast_store)] <- 0
-    W_ast <- c(Row_sum(as.matrix(W_ast_store))$Rowsum)
+    W_ast <- Fast_MVM(as.matrix(Z), delta * beta_t)
 
     ### We update WVar (for W2) so that we can do the E-Step ####
     W_ast_var <- NULL
     if (!is.null(Z_2)) {
-      W_ast_var_store <- MVM(as.matrix(Z_2), (beta_t^2) * (delta * (1 - delta)))$Res
-      W_ast_var_store[is.nan(W_ast_var_store) | is.na(W_ast_var_store)] <- 0
-      W_ast_var <- c(Row_sum(as.matrix(W_ast_var_store))$Rowsum)
+      W_ast_var <- Fast_MVM(as.matrix(Z_2), (beta_t^2) * (delta * (1 - delta)))
     }
 
     if (all(W_ast == 0)) {
@@ -583,22 +574,36 @@ lmmprobe <- function(
     inv_b_var <- solve(b_var)
 
     #### Precompute Vt matrices to share across both calib calls
-    Vt_bb_by_j_part <- future.apply::future_lapply(
-      1:n_subj,
-      FUN = Vt_bb_by_j_part_fun,
-      sigma2_lmm_value = sigma2_lmm, Tt_invR_T = Tt_invR_T,
-      inv_b_var_value = inv_b_var
-    )
-
     W_ast_var_split <- lapply(split(W_ast_var, ID), matrix, ncol = 1)
-    Vt_Wb_by_j_part <- future.apply::future_lapply(1:n_subj,
-      FUN = Vt_Wb_by_j_part_fun,
-      Tt_invR_T = Tt_invR_T, sigma2_lmm_value = sigma2_lmm,
-      inv_b_var_value = inv_b_var, Tt_invR = Tt_invR,
-      W_ast_var_split = W_ast_var_split
+
+    expectations_out <- Compute_Expectations(
+      Tt_invR_T = Tt_invR_T,
+      sigma2_lmm_value = sigma2_lmm,
+      inv_b_var_value = inv_b_var,
+      Tt_invR = Tt_invR,
+      W_ast_var_split = W_ast_var_split,
+      curr_T_split = curr_T_split,
+      curr_T_split_t = curr_T_split_t,
+      W_ast_split = W_ast_split,
+      b_vec = b_vec,
+      number_re = number_re,
+      n_subj = n_subj
     )
 
-    ### Calibration model with current W ####
+    Vt_bb_by_j_part <- expectations_out$Vt_bb
+    Vt_Wb_by_j_part <- expectations_out$Vt_Wb
+    sum_E_b1_sq <- expectations_out$sum_E_b1_sq
+    sum_E_Wb1_c <- expectations_out$sum_E_Wb1_c
+    cov_Wb1_c_list <- expectations_out$cov_Wb1
+
+    if (number_re == 2) {
+      sum_E_b2_sq <- expectations_out$sum_E_b2_sq
+      sum_E_b1b2_c <- expectations_out$sum_E_b1b2_c
+      sum_E_Wb2_c <- expectations_out$sum_E_Wb2_c
+      cov_Wb2_c_list <- expectations_out$cov_Wb2
+      cov_b1b2_c_list <- expectations_out$cov_b1b2
+    }
+
     c_coefs <- calib(
       W_ast,
       ID,
@@ -617,7 +622,8 @@ lmmprobe <- function(
       number_re,
       X,
       Vt_bb_by_j_part = Vt_bb_by_j_part,
-      Vt_Wb_by_j_part = Vt_Wb_by_j_part
+      Vt_Wb_by_j_part = Vt_Wb_by_j_part,
+      expectations = expectations_out
     )
     Vt_Wb_by_j_part <- c_coefs$Vt_Wb_by_j_part
     c_coefs <- c_coefs$c_coefs
@@ -663,7 +669,6 @@ lmmprobe <- function(
 
     b_vec_out_new_train <- cbind(b_vec_out_new, sort(ID))
 
-    ### Calibration model with current W and current b ####
     c_coefs <- calib_final(
       W_ast,
       ID,
@@ -675,39 +680,22 @@ lmmprobe <- function(
       Tt_invR,
       curr_T_split,
       curr_T_split_t,
-      b_vec, intercept,
+      b_vec,
+      intercept,
       curr_T,
       b,
       number_re,
       X,
       Vt_bb_by_j_part = Vt_bb_by_j_part,
-      Vt_Wb_by_j_part = Vt_Wb_by_j_part
+      Vt_Wb_by_j_part = Vt_Wb_by_j_part,
+      expectations = expectations_out
     )
 
     Vt_Wb_by_j_part <- c_coefs$Vt_Wb_by_j_part
     c_coefs <- c_coefs$c_coefs
 
-    cov_Wb1_c <- unlist(
-      future.apply::future_lapply(
-        1:n_subj,
-        FUN = cov_Wb1_c_fun,
-        curr_T_split = curr_T_split,
-        Vt_Wb_by_j_part = Vt_Wb_by_j_part
-      )
-    ) # Cov W-b1
-
-    if (number_re == 1) {
-      cov_Wb2_c <- NULL
-    } else {
-      cov_Wb2_c <- unlist(
-        future.apply::future_lapply(
-          1:n_subj,
-          FUN = cov_Wb2_c_fun,
-          curr_T_split,
-          Vt_Wb_by_j_part
-        )
-      ) # Cov W-b2
-    }
+    cov_Wb1_c <- unlist(cov_Wb1_c_list)
+    cov_Wb2_c <- if (number_re == 2) unlist(cov_Wb2_c_list) else NULL
 
 
     ### We calculate error e and trace eRe ####
@@ -729,13 +717,13 @@ lmmprobe <- function(
     e_split_t <- lapply(e_split, t)
     et_invR_e <- unlist(Map("%*%", Map("%*%", e_split_t, invR), e_split))
 
-    trace_eRe <- future.apply::future_sapply(
-      1:n_subj,
-      FUN = trace_eRe_fun,
-      Tt_invR_T,
-      sigma2_lmm,
-      inv_b_var,
-      et_invR_e
+    trace_eRe <- Compute_Trace(
+      Tt_invR_T = Tt_invR_T,
+      sigma2_lmm_value = sigma2_lmm,
+      inv_b_var_value = inv_b_var,
+      et_invR_e = as.list(et_invR_e),
+      number_re = number_re,
+      n_subj = n_subj
     )
 
     ### Saving outputs from the E-step ####
@@ -744,10 +732,10 @@ lmmprobe <- function(
 
     ### Wrapping up E-Step ####
     if (sum(delta) == 0) {
-      print("Delta is equal to zero")
       if (try2 == 0) {
-        cat("Warning loop completely recycled back to beta=0.\n
-                      Trying again with different starting values. \n")
+        warning(
+          "Loop completely recycled back to beta=0. Trying again with different starting values."
+        )
         count <- 0
         beta_tilde <- rep(0.0001, M)
         beta_tilde_var <- rep(0, M)
@@ -793,8 +781,9 @@ lmmprobe <- function(
       }
       if (try2 == 2) {
         conv <- 2
-        cat("Warning: loop completely recycled back to beta=delta=0 twice.
-            Optimization failed.\n")
+        warning(
+          "Loop completely recycled back to beta=delta=0 twice. Optimization failed."
+        )
       }
     } # end of big if (sum(delta) == 0)  statement
 
@@ -899,24 +888,14 @@ lmmprobe <- function(
 
   # This is the calculation various quantities for a test set ####
   if (!is.null(Y_test) & !is.null(Z_test) & !is.null(V_test)) {
-    W_ast_store_new <- MVM(as.matrix(Z_test), delta * beta_tilde)$Res
-
-    W_ast_store_new[is.nan(W_ast_store_new) | is.na(W_ast_store_new)] <- 0
-
-    W_ast_new <- c(Row_sum(as.matrix(W_ast_store_new))$Rowsum)
+    W_ast_new <- Fast_MVM(as.matrix(Z_test), delta * beta_tilde)
 
     Z_2_new <- Z_test * Z_test
 
-    W_ast_var_store_new <- MVM(
+    W_ast_var_new <- Fast_MVM(
       as.matrix(Z_2_new),
       (beta_tilde^2) * (delta * (1 - delta))
-    )$Res
-
-    W_ast_var_store_new[
-      is.nan(W_ast_var_store_new) | is.na(W_ast_var_store_new)
-    ] <- 0
-
-    W_ast_var_new <- c(Row_sum(as.matrix(W_ast_var_store_new))$Rowsum)
+    )
 
     W_ast_new_split <- lapply(split(W_ast_new, ID_test), matrix, ncol = 1)
 

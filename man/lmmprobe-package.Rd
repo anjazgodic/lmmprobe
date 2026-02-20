@@ -7,4 +7,14 @@
 \description{
 Implements a partitioned Empirical Bayes ECM algorithm for sparse high-dimensional linear mixed modeling. The package provides efficient estimation and inference for mixed models with high-dimensional fixed effects.
 }
+\author{
+\strong{Maintainer}: Anja Zgodic \email{azgodic@email.sc.edu}
+
+Authors:
+\itemize{
+  \item Alex McLain
+  \item Peter Olejua
+}
+
+}
 \keyword{internal}

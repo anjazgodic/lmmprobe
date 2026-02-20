@@ -1,0 +1,170 @@
+\nonstopmode{}
+\documentclass[a4paper]{book}
+\usepackage[times,hyper]{Rd}
+\usepackage{makeidx}
+\makeatletter\@ifl@t@r\fmtversion{2018/04/01}{}{\usepackage[utf8]{inputenc}}\makeatother
+% \usepackage{graphicx} % @USE GRAPHICX@
+\makeindex{}
+\begin{document}
+\chapter*{}
+\begin{center}
+{\textbf{\huge Package `lmmprobe'}}
+\par\bigskip{\large \today}
+\end{center}
+\ifthenelse{\boolean{Rd@use@hyper}}{\hypersetup{pdftitle = {lmmprobe: Sparse High-Dimensional Linear Mixed Modeling with a Partitioned Empirical Bayes ECM Algorithm}}}{}
+\ifthenelse{\boolean{Rd@use@hyper}}{\hypersetup{pdfauthor = {Anja Zgodic; Alex McLain; Peter Olejua}}}{}
+\begin{description}
+\raggedright{}
+\item[Type]\AsIs{Package}
+\item[Title]\AsIs{Sparse High-Dimensional Linear Mixed Modeling with a Partitioned
+Empirical Bayes ECM Algorithm}
+\item[Version]\AsIs{1.0.1}
+\item[Date]\AsIs{2026-02-18}
+\item[Description]\AsIs{Implements a partitioned Empirical Bayes ECM algorithm for sparse high-dimensional linear mixed modeling. The package provides efficient estimation and inference for mixed models with high-dimensional fixed effects.}
+\item[License]\AsIs{GPL (>= 2)}
+\item[Encoding]\AsIs{UTF-8}
+\item[RoxygenNote]\AsIs{7.3.3}
+\item[Depends]\AsIs{R (>= 3.5.0)}
+\item[Imports]\AsIs{Rcpp (>= 1.0.8.3), tidyr (>= 1.2.0), lme4 (>= 1.1-29), future
+(>= 1.28.0), future.apply (>= 1.10.0)}
+\item[LinkingTo]\AsIs{Rcpp, RcppArmadillo}
+\item[Suggests]\AsIs{testthat (>= 3.0.0), knitr, rmarkdown, MASS}
+\item[VignetteBuilder]\AsIs{knitr}
+\item[NeedsCompilation]\AsIs{yes}
+\item[Author]\AsIs{Anja Zgodic [aut, cre],
+Alex McLain [aut],
+Peter Olejua [aut]}
+\item[Maintainer]\AsIs{Anja Zgodic }\email{azgodic@email.sc.edu}\AsIs{}
+\end{description}
+\Rdcontents{Contents}
+\HeaderA{lmmprobe-package}{lmmprobe: Sparse High-Dimensional Linear Mixed Modeling with a Partitioned Empirical Bayes ECM Algorithm}{lmmprobe.Rdash.package}
+\keyword{internal}{lmmprobe-package}
+%
+\begin{Description}
+Implements a partitioned Empirical Bayes ECM algorithm for sparse high-dimensional linear mixed modeling. The package provides efficient estimation and inference for mixed models with high-dimensional fixed effects.
+\end{Description}
+%
+\begin{Author}
+\strong{Maintainer}: Anja Zgodic \email{azgodic@email.sc.edu}
+
+Authors:
+\begin{itemize}
+
+\item{} Alex McLain
+\item{} Peter Olejua
+
+\end{itemize}
+
+
+\end{Author}
+\HeaderA{lmmprobe}{Sparse high-dimensional linear mixed modeling with PaRtitiOned empirical Bayes ECM (LMM-PROBE) algorithm.}{lmmprobe}
+%
+\begin{Description}
+Sparse high-dimensional linear mixed modeling with PaRtitiOned empirical Bayes ECM (LMM-PROBE) algorithm. Currently, the package offers functionality for two scenarios. Scenario 1: only a random intercept, each unit has the same number of observations; Scenario 2: a random intercept and a random slope, each unit has the same number of observations. We are actively expanding the package for more flexibility and scenarios.
+\end{Description}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{Y}] A training-data matrix containing the outcome \code{Y}.
+
+\item[\code{Z}] A training-data matrix containing the sparse fixed-effect predictors on which to apply the lmmprobe algorithm. The first columns should be the "id" column.
+
+\item[\code{V}] A training-data matrix containing non-sparse predictors for the random effects. This matrix is currently only programmed for two scenarios. Scenario 1: only a random intercept, where V is a matrix with one column containing ID's and each unit has the same number of observations. Scenario 2: a random intercept and a random slope, where V is a matrix with two columns. The first column is ID and the second column is a continuous variable (e.g. time) for which a random slope is to be estimated. Each unit has the same number of observations.
+
+\item[\code{ID\_data}] A factor vector of IDs for subjects in the training set.
+
+\item[\code{Y\_test}] A testing-data matrix containing the outcome \code{Y}. Default is NULL.
+
+\item[\code{Z\_test}] A training-data matrix containing the sparse fixed-effect predictors on which to apply the lmmprobe algorithm. The first columns should be the "id" column. Default is NULL.
+
+\item[\code{V\_test}] A training-data matrix containing non-sparse predictors for the random effects. This matrix is currently only programmed for two scenarios. Scenario 1: only a random intercept, where V is a matrix with one column containing ID's and each unit has the same number of observations. Scenario 2: a random intercept and a random slope, where V is a matrix with two columns. The first column is ID and the second column is a continuous variable (e.g. time) for which a random slope is to be estimated. Each unit has the same number of observations. Default is NULL.
+
+\item[\code{ID\_test}] A factor vector of IDs for subjects in the testing set.
+
+\item[\code{alpha}] Type I error; significance level.
+
+\item[\code{ep}] Value against which to compare convergence criterion, we recommend 0.05.
+
+\item[\code{B}] The number of groups to categorize estimated coefficients in to calculate correlation \eqn{\rho}{}. We recommend five.
+
+\item[\code{adj}] A factor multiplying Silverman’s 'rule of thumb' in determining the bandwidth for density estimation, same as the 'adjust' argument of R's density function. Default is three.
+
+\item[\code{maxit}] Maximum number of iterations the algorithm will run for. Default is 10000.
+
+\item[\code{cpus}] The number of CPUS user would like to use for parallel computations. Default is four.
+
+\item[\code{LR}] A learning rate parameter \code{r}. Using zero corresponds to the implementation described in Zgodic et al.
+
+\item[\code{C}] A learning rate parameter \code{c}. Using one corresponds to the implementation described in Zgodic et al.
+
+\item[\code{sigma\_init}] An initial value for the residual variance parameter. Default is NULL which corresponds to the sample variance of Y.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+A list of the output of the lmmprobe function, including
+
+\code{beta\_hat, beta\_hat\_var} MAP estimates of the posterior expectation (beta\_hat) and variance (beta\_hat\_var) of the prior mean (\eqn{\beta}{}) of the regression coefficients assuming \eqn{\gamma=1}{},
+
+\code{gamma} the posterior expectation of the latent \eqn{\gamma}{} variables,
+
+\code{preds} predictions of \eqn{Y}{},
+
+\code{PI\_lower, PI\_upper} lower and upper prediction intervals for the predictions,
+
+\code{sigma2\_est} MAP estimate of the residual variance,
+
+\code{random\_var} MAP estimate of the random effect(s) variance,
+
+\code{random\_intercept} estimated random intercept terms,
+
+\code{random\_slope} estimated random slope terms, if applicable.
+\end{Value}
+%
+\begin{References}
+Zgodic A, Bay R, Zhang J, Olejua P, and McLain AC (2023). Sparse high-dimensional linear mixed modeling with a partitioned empirical Bayes ECM algorithm. arXiv preprint arXiv:2310.12285.
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+library(lmmprobe)
+data(SLE)
+Y <- matrix(real_data[, "y"], ncol = 1)
+Z <- real_data[, 4:ncol(real_data)]
+V <- matrix(real_data[, "id"], ncol = 1)
+ID_data <- as.numeric(as.character(real_data$id))
+full_res <- lmmprobe(Y = Y, Z = Z, V = V, ID_data = ID_data)
+\end{ExampleCode}
+\end{Examples}
+\HeaderA{SLE}{Systemic Lupus Erythematosus (SLE) Data}{SLE}
+\aliasA{real\_data}{SLE}{real.Rul.data}
+%
+\begin{Description}
+A dataset containing data from a study on Systemic Lupus Erythematosus (SLE).
+Loading this dataset creates an object named `real\_data`.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+data(SLE)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+A data frame with observations on the following variables:
+\begin{description}
+
+\item[y] Response vector.
+\item[id] Subject ID.
+\item[time] Time of observation.
+\item[...] Other predictors.
+
+\end{description}
+
+\end{Format}
+%
+\begin{Source}
+Simulated or real data provided with the package.
+\end{Source}
+\printindex{}
+\end{document}

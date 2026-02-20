@@ -16,6 +16,8 @@ List Compute_Random_Effects(const List &Tt_invR, const List &Tt_invR_T,
 
   std::vector<arma::vec> b_vec(n_subj);
 
+  // Pre-convert lists to vectors of matrices/vectors to avoid R overhead in
+  // parallel loop
   std::vector<arma::mat> Tt_invR_vec(n_subj);
   std::vector<arma::mat> Tt_invR_T_vec(n_subj);
   std::vector<arma::vec> Y_vec(n_subj);
@@ -27,17 +29,24 @@ List Compute_Random_Effects(const List &Tt_invR, const List &Tt_invR_T,
     X_vec.resize(n_subj);
   }
 
+  bool is_X_null = X_split_opt.isNull();
+  List X_l;
+  if (has_X && !is_X_null) {
+    X_l = as<List>(X_split_opt);
+  }
+
   for (int i = 0; i < n_subj; ++i) {
     Tt_invR_vec[i] = as<arma::mat>(Tt_invR[i]);
     Tt_invR_T_vec[i] = as<arma::mat>(Tt_invR_T[i]);
     Y_vec[i] = as<arma::vec>(Y_split[i]);
     W_vec[i] = as<arma::vec>(W_ast_split[i]);
     int_vec[i] = as<arma::vec>(intercept_split[i]);
-    if (has_X) {
-      List X_l = as<List>(X_split_opt);
+    if (has_X && !is_X_null) {
       X_vec[i] = as<arma::vec>(X_l[i]);
     }
   }
+
+  int k = inv_b_var.n_rows;
 
 #pragma omp parallel for
   for (int i = 0; i < n_subj; ++i) {
@@ -49,9 +58,26 @@ List Compute_Random_Effects(const List &Tt_invR, const List &Tt_invR_T,
       resid = Y_vec[i] - (coef_int * int_vec[i]) - (coef_W * W_vec[i]);
     }
 
-    arma::vec part2 = Tt_invR_vec[i] * resid;
+    arma::vec rhs = Tt_invR_vec[i] * resid;
     arma::mat LHS = Tt_invR_T_vec[i] + sigma2_lmm * inv_b_var;
-    b_vec[i] = arma::solve(LHS, part2);
+
+    if (k == 1) {
+      b_vec[i] = rhs / LHS(0, 0);
+    } else if (k == 2) {
+      double a = LHS(0, 0), b = LHS(0, 1);
+      double c = LHS(1, 0), d = LHS(1, 1);
+      double det = a * d - b * c;
+      if (std::abs(det) < 1e-18) {
+        b_vec[i] = arma::solve(LHS, rhs);
+      } else {
+        double inv_det = 1.0 / det;
+        b_vec[i].set_size(2);
+        b_vec[i](0) = inv_det * (d * rhs(0) - b * rhs(1));
+        b_vec[i](1) = inv_det * (-c * rhs(0) + a * rhs(1));
+      }
+    } else {
+      b_vec[i] = arma::solve(LHS, rhs);
+    }
   }
 
   List result(n_subj);
@@ -59,6 +85,26 @@ List Compute_Random_Effects(const List &Tt_invR, const List &Tt_invR_T,
     result[i] = b_vec[i];
   }
   return result;
+}
+
+#include <cmath>
+#include <vector>
+
+using namespace Rcpp;
+
+// Helper for 2x2 symmetric PD inverse
+inline arma::mat inv_2x2(const arma::mat &A) {
+  double a = A(0, 0), b = A(0, 1), d = A(1, 1);
+  double det = a * d - b * b;
+  arma::mat res(2, 2);
+  if (std::abs(det) < 1e-18) {
+    return arma::inv_sympd(A);
+  }
+  double inv_det = 1.0 / det;
+  res(0, 0) = d * inv_det;
+  res(1, 1) = a * inv_det;
+  res(0, 1) = res(1, 0) = -b * inv_det;
+  return res;
 }
 
 // [[Rcpp::export]]
@@ -75,12 +121,21 @@ List Compute_Posterior_Var(const List &Tt_invR_T, const List &b_vec,
     b_v[i] = as<arma::vec>(b_vec[i]);
   }
 
+  int k = inv_b_var.n_rows;
+
 #pragma omp parallel for
   for (int i = 0; i < n_subj; ++i) {
     arma::mat LHS = (1.0 / sigma2_lmm) * Tt_invR_T_vec[i] + inv_b_var;
-    b2_vec[i] =
-        arma::solve(LHS, arma::eye(inv_b_var.n_rows, inv_b_var.n_cols)) +
-        (b_v[i] * b_v[i].t());
+    arma::mat V_b;
+    if (k == 1) {
+      V_b = arma::mat(1, 1);
+      V_b(0, 0) = 1.0 / LHS(0, 0);
+    } else if (k == 2) {
+      V_b = inv_2x2(LHS);
+    } else {
+      V_b = arma::solve(LHS, arma::eye(k, k));
+    }
+    b2_vec[i] = V_b + (b_v[i] * b_v[i].t());
   }
 
   List result(n_subj);
@@ -89,6 +144,7 @@ List Compute_Posterior_Var(const List &Tt_invR_T, const List &b_vec,
   }
   return result;
 }
+
 // [[Rcpp::export]]
 List Compute_Expectations(const List &Tt_invR_T, double sigma2_lmm_value,
                           const arma::mat &inv_b_var_value, const List &Tt_invR,
@@ -131,8 +187,19 @@ List Compute_Expectations(const List &Tt_invR_T, double sigma2_lmm_value,
                                        sum_E_Wb1_c, sum_E_Wb2_c)
   for (int i = 0; i < n_subj; ++i) {
     arma::mat A = (1.0 / sigma2_lmm_value) * Tt_invR_T_vec[i] + inv_b_var_value;
-    Vt_bb_vec[i] = arma::solve(A, arma::eye(number_re, number_re));
 
+    if (number_re == 1) {
+      Vt_bb_vec[i] = arma::mat(1, 1);
+      Vt_bb_vec[i](0, 0) = 1.0 / A(0, 0);
+    } else if (number_re == 2) {
+      Vt_bb_vec[i] = inv_2x2(A);
+    } else {
+      Vt_bb_vec[i] = arma::solve(A, arma::eye(number_re, number_re));
+    }
+
+    // Vt_Wb = Vt_bb * (Tt_invR * W_ast_var) / sigma2_lmm?
+    // Wait, the original was: Vt_bb * (Tt_invR * W_ast_var)
+    // Let's stick to the original logic
     Vt_Wb_vec[i] = Vt_bb_vec[i] * (Tt_invR_vec[i] * W_ast_var_vec[i]);
 
     arma::vec T_col0 = curr_T_vec[i].col(0);
@@ -210,8 +277,20 @@ NumericVector Compute_Trace(const List &Tt_invR_T, double sigma2_lmm_value,
 #pragma omp parallel for
   for (int i = 0; i < n_subj; ++i) {
     arma::mat A = (1.0 / sigma2_lmm_value) * Tt_invR_T_vec[i] + inv_b_var_value;
-    arma::mat X_mat = arma::solve(A, Tt_invR_T_vec[i]);
-    double tr = arma::trace(X_mat);
+    double tr = 0;
+    if (number_re == 1) {
+      tr = Tt_invR_T_vec[i](0, 0) / A(0, 0);
+    } else if (number_re == 2) {
+      arma::mat A_inv = inv_2x2(A);
+      // tr(A_inv * B)
+      tr = A_inv(0, 0) * Tt_invR_T_vec[i](0, 0) +
+           A_inv(0, 1) * Tt_invR_T_vec[i](1, 0) +
+           A_inv(1, 0) * Tt_invR_T_vec[i](0, 1) +
+           A_inv(1, 1) * Tt_invR_T_vec[i](1, 1);
+    } else {
+      arma::mat X_mat = arma::solve(A, Tt_invR_T_vec[i]);
+      tr = arma::trace(X_mat);
+    }
     result[i] = tr + et_invR_e_vec[i];
   }
 
