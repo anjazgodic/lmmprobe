@@ -140,15 +140,15 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// MVM
-List MVM(const arma::mat X, const arma::vec v);
-RcppExport SEXP _lmmprobe_MVM(SEXP XSEXP, SEXP vSEXP) {
+// Fast_MVM
+arma::vec Fast_MVM(const arma::mat& X, const arma::vec& v);
+RcppExport SEXP _lmmprobe_Fast_MVM(SEXP XSEXP, SEXP vSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const arma::mat >::type X(XSEXP);
-    Rcpp::traits::input_parameter< const arma::vec >::type v(vSEXP);
-    rcpp_result_gen = Rcpp::wrap(MVM(X, v));
+    Rcpp::traits::input_parameter< const arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type v(vSEXP);
+    rcpp_result_gen = Rcpp::wrap(Fast_MVM(X, v));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -227,7 +227,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_lmmprobe_Compute_Full_Vt", (DL_FUNC) &_lmmprobe_Compute_Full_Vt, 6},
     {"_lmmprobe_LM_by_col", (DL_FUNC) &_lmmprobe_LM_by_col, 3},
     {"_lmmprobe_LM_by_col_w_covs", (DL_FUNC) &_lmmprobe_LM_by_col_w_covs, 4},
-    {"_lmmprobe_MVM", (DL_FUNC) &_lmmprobe_MVM, 2},
+    {"_lmmprobe_Fast_MVM", (DL_FUNC) &_lmmprobe_Fast_MVM, 2},
     {"_lmmprobe_Row_sum", (DL_FUNC) &_lmmprobe_Row_sum, 1},
     {"_lmmprobe_UNHIDEM_cpp0_5", (DL_FUNC) &_lmmprobe_UNHIDEM_cpp0_5, 14},
     {"_lmmprobe_UNHIDEM_cpp0_5_w_covs", (DL_FUNC) &_lmmprobe_UNHIDEM_cpp0_5_w_covs, 20},

@@ -1,0 +1,30 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2026.1.14)  19 FEB 2026 20:13
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**\input ./Rd2.tex
+(./Rd2.tex
+
+! LaTeX Error: File `book.cls' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: cls)
+
+Enter file name: 
+! Emergency stop.
+<read *> 
+         
+l.3 \usepackage
+               [times,hyper]{Rd}^^M
+*** (cannot \read from terminal in nonstop modes)
+
+ 
+Here is how much of TeX's memory you used:
+ 19 strings out of 475171
+ 413 string characters out of 5767095
+ 386848 words of memory out of 5000000
+ 23116 multiletter control sequences out of 15000+600000
+ 558837 words of font info for 36 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 19i,0n,29p,80b,17s stack positions out of 10000i,1000n,20000p,200000b,200000s
+!  ==> Fatal error occurred, no output PDF file produced!

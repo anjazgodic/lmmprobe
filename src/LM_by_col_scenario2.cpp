@@ -18,48 +18,37 @@ List LM_by_col(const arma::vec &y, const arma::mat &X, double sigma2_lmm) {
   arma::mat sig(d, 1);
   sig.fill(NA_REAL);
 
-  // Precompute centered Y
-  double mean_y = arma::mean(y);
-  arma::vec y_cen = y - mean_y;
-  double Syy = arma::dot(y_cen, y_cen);
-
-  // We iterate over columns. For each column x, we fit y ~ x.
-  // Model: y = beta0 + beta1 * x + epsilon
+  // Precompute y terms
+  double sum_y = arma::sum(y);
+  double mean_y = sum_y / (double)n;
+  double dot_y_y = arma::dot(y, y);
+  double Syy = dot_y_y - n * mean_y * mean_y;
 
   for (int col = 0; col < d; ++col) {
+    if (col % 1000 == 0)
+      Rcpp::checkUserInterrupt();
 
-    // Access column without copy
     const arma::subview_col<double> x = X.col(col);
 
-    double mean_x = arma::mean(x);
-    arma::vec x_cen = x - mean_x;
+    double sum_x = arma::sum(x);
+    double mean_x = sum_x / (double)n;
+    double dot_x_x = arma::dot(x, x);
+    double Sxx = dot_x_x - n * mean_x * mean_x;
 
-    // Sxx = sum((xi - mean_x)^2)
-    double Sxx = arma::dot(x_cen, x_cen);
-
-    // Check for singularity (constant x)
-    if (Sxx < 1e-12) {
-      // Leaves as NA
+    if (Sxx < 1e-12)
       continue;
-    }
 
-    // Sxy = sum((xi - mean_x)*(yi - mean_y))
-    double Sxy = arma::dot(x_cen, y_cen);
+    double dot_x_y = arma::dot(x, y);
+    double Sxy = dot_x_y - n * mean_x * mean_y;
 
     double beta1 = Sxy / Sxx;
     double beta0 = mean_y - beta1 * mean_x;
 
-    // Optimized RSS calculation:
-    // RSS = Syy - beta1 * Sxy
     double RSS = Syy - beta1 * Sxy;
     if (RSS < 0)
       RSS = 0.0;
 
-    // sigma^2 estimation (residual variance of the regression)
     double sig2 = RSS / (double)(n - 2);
-
-    // Standard Errors using the passed sigma2_lmm scaling
-    // Matches original logic: se = sqrt(sigma2_lmm * diag(inv(X'X)))
 
     double var_beta1 = sigma2_lmm / Sxx;
     double var_beta0 = sigma2_lmm * (1.0 / n + (mean_x * mean_x) / Sxx);
@@ -69,9 +58,6 @@ List LM_by_col(const arma::vec &y, const arma::mat &X, double sigma2_lmm) {
     se(col, 0) = std::sqrt(var_beta0);
     se(col, 1) = std::sqrt(var_beta1);
     sig(col, 0) = std::sqrt(sig2);
-
-    if (col % 1000 == 0)
-      Rcpp::checkUserInterrupt();
   }
 
   return List::create(Named("Coefficients") = coef_mat, Named("StdErr") = se,

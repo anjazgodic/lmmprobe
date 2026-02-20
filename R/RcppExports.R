@@ -33,8 +33,8 @@ LM_by_col_w_covs <- function(y, X, X_adj, sigma2_lmm) {
     .Call(`_lmmprobe_LM_by_col_w_covs`, y, X, X_adj, sigma2_lmm)
 }
 
-MVM <- function(X, v) {
-    .Call(`_lmmprobe_MVM`, X, v)
+Fast_MVM <- function(X, v) {
+    .Call(`_lmmprobe_Fast_MVM`, X, v)
 }
 
 Row_sum <- function(X) {

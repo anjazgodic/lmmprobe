@@ -1,24 +1,23 @@
 // [[Rcpp::depends(RcppArmadillo)]]
-
-#include <fstream>
-#include <iostream>
 #include <RcppArmadillo.h>
 
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-List MVM(const arma::mat X,const arma::vec v) {
-  
-  arma::mat Z = X.each_row()%arma::trans(v);
-  
-  return List::create(Named("Res") = Z);
+arma::vec Fast_MVM(const arma::mat &X, const arma::vec &v) {
+  int n = X.n_rows;
+  int m = X.n_cols;
+  arma::vec res(n, arma::fill::zeros);
+  for (int j = 0; j < m; ++j) {
+    double vj = v[j];
+    if (!std::isfinite(vj))
+      continue;
+    for (int i = 0; i < n; ++i) {
+      double xij = X(i, j);
+      if (std::isfinite(xij)) {
+        res[i] += xij * vj;
+      }
+    }
+  }
+  return res;
 }
-
-
-
-
-
-
-
-   
-  
