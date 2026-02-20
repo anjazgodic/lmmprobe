@@ -72,7 +72,7 @@ detaching ‘package:future’
 
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  13.906 0.304 9.66 0 0 
+Time elapsed:  14.317 0.333 10.198 0 0 
 > grDevices::dev.off()
 null device 
           1 

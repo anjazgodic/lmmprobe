@@ -12,8 +12,10 @@ Implements a partitioned Empirical Bayes ECM algorithm for sparse high-dimension
 
 Authors:
 \itemize{
-  \item Alex McLain
-  \item Peter Olejua
+  \item Ray Bai (\href{https://orcid.org/0000-0001-7150-7229}{ORCID})
+  \item Jiajia Zhang (\href{https://orcid.org/0000-0001-8281-8532}{ORCID})
+  \item Alex McLain (\href{https://orcid.org/0000-0002-5475-0670}{ORCID})
+  \item Peter Olejua (\href{https://orcid.org/0000-0002-2478-0908}{ORCID})
 }
 
 }

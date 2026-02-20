@@ -18,8 +18,9 @@
 ^\.claude$
 ^REPORT\.md$
 ^check_output_.*\.txt$
-^data_analysis_code\.R$
 ^manual_test_output\.txt$
-^simulation_code\.R$
 ^test_output\.txt$
 ^test_output_future\.txt$
+^lmmprobe\.Rcheck$
+^data_analysis_code\.R$
+^simulation_code\.R$
