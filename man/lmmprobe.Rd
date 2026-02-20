@@ -70,5 +70,5 @@ ID_data <- as.numeric(as.character(real_data$id))
 full_res <- lmmprobe(Y = Y, Z = Z, V = V, ID_data = ID_data)
 }
 \references{
-Zgodic A, Bay R, Zhang J, Olejua P, and McLain AC (2023). Sparse high-dimensional linear mixed modeling with a partitioned empirical Bayes ECM algorithm. arXiv preprint arXiv:2310.12285.
+Zgodic, A., Bai, R., Zhang, J. et al. (2025). Sparse high-dimensional linear mixed modeling with a partitioned empirical Bayes ECM algorithm. Stat Comput 35, 109. https://doi.org/10.1007/s11222-025-10649-z
 }

@@ -8,12 +8,22 @@ Authors@R: c(person(given = "Anja",
                     family = "Zgodic",
                     role = c("aut", "cre"),
                     email = "azgodic@email.sc.edu"),
+             person(given = "Ray",
+                    family = "Bai",
+                    role = "aut",
+                    comment = c(ORCID = "0000-0001-7150-7229")),
+             person(given = "Jiajia",
+                    family = "Zhang",
+                    role = "aut",
+                    comment = c(ORCID = "0000-0001-8281-8532")),
              person(given = "Alex",
                     family = "McLain",
-                    role = "aut"),
+                    role = "aut",
+                    comment = c(ORCID = "0000-0002-5475-0670")),
              person(given = "Peter",
                     family = "Olejua",
-                    role = "aut"))
+                    role = "aut",
+                    comment = c(ORCID = "0000-0002-2478-0908")))
 Description: Implements a partitioned Empirical Bayes ECM algorithm for sparse high-dimensional linear mixed modeling. The package provides efficient estimation and inference for mixed models with high-dimensional fixed effects.
 License: GPL (>= 2)
 Encoding: UTF-8
@@ -25,9 +35,11 @@ LinkingTo: Rcpp, RcppArmadillo
 Suggests: testthat (>= 3.0.0), knitr, rmarkdown, MASS
 VignetteBuilder: knitr
 NeedsCompilation: yes
-Packaged: 2026-02-20 02:12:00 UTC; peter
+Packaged: 2026-02-20 03:10:30 UTC; peter
 Author: Anja Zgodic [aut, cre],
-  Alex McLain [aut],
-  Peter Olejua [aut]
+  Ray Bai [aut] (ORCID: <https://orcid.org/0000-0001-7150-7229>),
+  Jiajia Zhang [aut] (ORCID: <https://orcid.org/0000-0001-8281-8532>),
+  Alex McLain [aut] (ORCID: <https://orcid.org/0000-0002-5475-0670>),
+  Peter Olejua [aut] (ORCID: <https://orcid.org/0000-0002-2478-0908>)
 Maintainer: Anja Zgodic <azgodic@email.sc.edu>
-Built: R 4.5.2; x86_64-pc-linux-gnu; 2026-02-20 02:12:14 UTC; unix
+Built: R 4.5.2; x86_64-pc-linux-gnu; 2026-02-20 03:10:47 UTC; unix
