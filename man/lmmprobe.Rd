@@ -39,21 +39,21 @@
 \item{sigma_init}{An initial value for the residual variance parameter. Default is NULL which corresponds to the sample variance of Y.}
 }
 \value{
-A list of the output of the lmmprobe function, including 
+A list of the output of the lmmprobe function, including
 
-\code{beta_hat, beta_hat_var} MAP estimates of the posterior expectation (beta_hat) and variance (beta_hat_var) of the prior mean (\eqn{\beta}) of the regression coefficients assuming \eqn{\gamma=1}, 
+\code{beta_hat, beta_hat_var} MAP estimates of the posterior expectation (beta_hat) and variance (beta_hat_var) of the prior mean (\eqn{\beta}) of the regression coefficients assuming \eqn{\gamma=1},
 
-\code{gamma} the posterior expectation of the latent \eqn{\gamma} variables, 
+\code{gamma} the posterior expectation of the latent \eqn{\gamma} variables,
 
 \code{preds} predictions of \eqn{Y},
 
 \code{PI_lower, PI_upper} lower and upper prediction intervals for the predictions,
 
-\code{sigma2_est} MAP estimate of the residual variance, 
+\code{sigma2_est} MAP estimate of the residual variance,
 
-\code{random_var} MAP estimate of the random effect(s) variance, 
+\code{random_var} MAP estimate of the random effect(s) variance,
 
-\code{random_intercept} estimated random intercept terms,  
+\code{random_intercept} estimated random intercept terms,
 
 \code{random_slope} estimated random slope terms, if applicable.
 }
@@ -63,12 +63,12 @@ Sparse high-dimensional linear mixed modeling with PaRtitiOned empirical Bayes E
 \examples{
 library(lmmprobe)
 data(SLE)
-Y <- matrix(real_data[,"y"], ncol=1)
-Z <- real_data[,4:ncol(real_data)]
-V <- matrix(real_data[,"id"], ncol=1)
+Y <- matrix(real_data[, "y"], ncol = 1)
+Z <- real_data[, 4:ncol(real_data)]
+V <- matrix(real_data[, "id"], ncol = 1)
 ID_data <- as.numeric(as.character(real_data$id))
 full_res <- lmmprobe(Y = Y, Z = Z, V = V, ID_data = ID_data)
 }
 \references{
-Zgodic A, Bay R, Zhang J, Olejua P, and McLain AC (2023). Sparse high-dimensional linear mixed modeling with a partitioned empirical Bayes ECM algorithm. arXiv preprint arXiv:2310.12285.
+Zgodic, A., Bai, R., Zhang, J. et al. (2025). Sparse high-dimensional linear mixed modeling with a partitioned empirical Bayes ECM algorithm. Stat Comput 35, 109. https://doi.org/10.1007/s11222-025-10649-z
 }

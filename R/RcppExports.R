@@ -5,6 +5,26 @@ Col_sum <- function(X) {
     .Call(`_lmmprobe_Col_sum`, X)
 }
 
+Compute_Random_Effects <- function(Tt_invR, Tt_invR_T, Y_split, W_ast_split, intercept_split, X_split_opt, sigma2_lmm, inv_b_var, coef_int, coef_W, coef_X, has_X, n_subj) {
+    .Call(`_lmmprobe_Compute_Random_Effects`, Tt_invR, Tt_invR_T, Y_split, W_ast_split, intercept_split, X_split_opt, sigma2_lmm, inv_b_var, coef_int, coef_W, coef_X, has_X, n_subj)
+}
+
+Compute_Posterior_Var <- function(Tt_invR_T, b_vec, sigma2_lmm, inv_b_var, n_subj) {
+    .Call(`_lmmprobe_Compute_Posterior_Var`, Tt_invR_T, b_vec, sigma2_lmm, inv_b_var, n_subj)
+}
+
+Compute_Expectations <- function(Tt_invR_T, sigma2_lmm_value, inv_b_var_value, Tt_invR, W_ast_var_split, curr_T_split, curr_T_split_t, W_ast_split, b_vec, number_re, n_subj) {
+    .Call(`_lmmprobe_Compute_Expectations`, Tt_invR_T, sigma2_lmm_value, inv_b_var_value, Tt_invR, W_ast_var_split, curr_T_split, curr_T_split_t, W_ast_split, b_vec, number_re, n_subj)
+}
+
+Compute_Trace <- function(Tt_invR_T, sigma2_lmm_value, inv_b_var_value, et_invR_e, number_re, n_subj) {
+    .Call(`_lmmprobe_Compute_Trace`, Tt_invR_T, sigma2_lmm_value, inv_b_var_value, et_invR_e, number_re, n_subj)
+}
+
+Compute_Full_Vt <- function(Vt_bb_vec, Vt_Wb_vec, curr_T_split, W_ast_var, number_re, n_total) {
+    .Call(`_lmmprobe_Compute_Full_Vt`, Vt_bb_vec, Vt_Wb_vec, curr_T_split, W_ast_var, number_re, n_total)
+}
+
 LM_by_col <- function(y, X, sigma2_lmm) {
     .Call(`_lmmprobe_LM_by_col`, y, X, sigma2_lmm)
 }
@@ -13,8 +33,8 @@ LM_by_col_w_covs <- function(y, X, X_adj, sigma2_lmm) {
     .Call(`_lmmprobe_LM_by_col_w_covs`, y, X, X_adj, sigma2_lmm)
 }
 
-MVM <- function(X, v) {
-    .Call(`_lmmprobe_MVM`, X, v)
+Fast_MVM <- function(X, v) {
+    .Call(`_lmmprobe_Fast_MVM`, X, v)
 }
 
 Row_sum <- function(X) {
