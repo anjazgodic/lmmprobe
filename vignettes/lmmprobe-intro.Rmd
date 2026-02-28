@@ -61,6 +61,7 @@ Y <- Z %*% beta_true + b_vec + rnorm(N, 0, sigma_e)
 # Fixed effect covariates (V)
 # For scenario 1 (random intercept), V is a 1-column matrix of IDs.
 V <- matrix(ID, nrow = N, ncol = 1)
+```
 
 ```{r lmmprobe_run}
 # Preparing inputs

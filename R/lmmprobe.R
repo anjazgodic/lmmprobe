@@ -9,7 +9,7 @@
 #' @param Y_test A testing-data matrix containing the outcome \code{Y}. Default is NULL.
 #' @param Z_test A training-data matrix containing the sparse fixed-effect predictors on which to apply the lmmprobe algorithm. The first columns should be the "id" column. Default is NULL.
 #' @param V_test A training-data matrix containing non-sparse predictors for the random effects. This matrix is currently only programmed for two scenarios. Scenario 1: only a random intercept, where V is a matrix with one column containing ID's and each unit has the same number of observations. Scenario 2: a random intercept and a random slope, where V is a matrix with two columns. The first column is ID and the second column is a continuous variable (e.g. time) for which a random slope is to be estimated. Each unit has the same number of observations. Default is NULL.
-#' @param ID_test A factor vector of IDs for subjects in the testing set.
+#' @param ID_test A factor vector of IDs for subjects in the testing set. Default is NULL.
 #' @param alpha Type I error; significance level.
 #' @param ep Value against which to compare convergence criterion, we recommend 0.05.
 #' @param B The number of groups to categorize estimated coefficients in to calculate correlation \eqn{\rho}. We recommend five.
@@ -37,13 +37,14 @@
 #'
 #' \code{random_slope} estimated random slope terms, if applicable.
 #' @examples
-#' library(lmmprobe)
+#' \donttest{
 #' data(SLE)
 #' Y <- matrix(real_data[, "y"], ncol = 1)
 #' Z <- real_data[, 4:ncol(real_data)]
 #' V <- matrix(real_data[, "id"], ncol = 1)
 #' ID_data <- as.numeric(as.character(real_data$id))
 #' full_res <- lmmprobe(Y = Y, Z = Z, V = V, ID_data = ID_data)
+#' }
 #' @references Zgodic, A., Bai, R., Zhang, J. et al. (2025). Sparse high-dimensional linear mixed modeling with a partitioned empirical Bayes ECM algorithm. Stat Comput 35, 109. https://doi.org/10.1007/s11222-025-10649-z
 #' @export
 
@@ -71,7 +72,7 @@ lmmprobe <- function(
   Y_test = NULL,
   Z_test = NULL,
   V_test = NULL,
-  ID_test,
+  ID_test = NULL,
   alpha = 0.05,
   maxit = 10000,
   ep = 0.05,

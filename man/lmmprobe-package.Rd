@@ -5,7 +5,15 @@
 \alias{lmmprobe-package}
 \title{lmmprobe: Sparse High-Dimensional Linear Mixed Modeling with a Partitioned Empirical Bayes ECM Algorithm}
 \description{
-Implements a partitioned Empirical Bayes ECM algorithm for sparse high-dimensional linear mixed modeling. The package provides efficient estimation and inference for mixed models with high-dimensional fixed effects.
+Implements a partitioned Empirical Bayes ECM algorithm for sparse high-dimensional linear mixed modeling as described in Zgodic, Bai, Zhang, and McLain (2025) \doi{10.1007/s11222-025-10649-z}. The package provides efficient estimation and inference for mixed models with high-dimensional fixed effects.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/anjazgodic/lmmprobe}
+  \item Report bugs at \url{https://github.com/anjazgodic/lmmprobe/issues}
+}
+
 }
 \author{
 \strong{Maintainer}: Anja Zgodic \email{azgodic@email.sc.edu}
