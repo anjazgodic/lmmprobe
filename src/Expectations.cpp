@@ -1,7 +1,9 @@
 // [[Rcpp::depends(RcppArmadillo)]]
 
 #include <RcppArmadillo.h>
+#ifdef _OPENMP
 #include <omp.h>
+#endif
 
 using namespace Rcpp;
 
