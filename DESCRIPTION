@@ -6,7 +6,7 @@ Date: 2026-02-27
 Authors@R: c(person(given = "Anja",
                     family = "Zgodic",
                     role = c("aut", "cre"),
-                    email = "azgodic@email.sc.edu"),
+                    email = "anja.zgodic@gmail.com"),
              person(given = "Ray",
                     family = "Bai",
                     role = "aut",
