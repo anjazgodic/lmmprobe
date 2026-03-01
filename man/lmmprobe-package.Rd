@@ -16,7 +16,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Anja Zgodic \email{azgodic@email.sc.edu}
+\strong{Maintainer}: Anja Zgodic \email{anja.zgodic@gmail.com}
 
 Authors:
 \itemize{
