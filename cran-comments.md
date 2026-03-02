@@ -2,7 +2,11 @@
 
 0 errors | 0 warnings | 1 note
 
-* This is a new submission.
+* This is a resubmission. Changes from initial submission:
+  - Wrapped acronym 'ECM' and author surnames in single quotes in DESCRIPTION
+    to address "possibly misspelled words" NOTE.
+  - Removed obsolete `CXX_STD = CXX11` from `src/Makevars.win` to address
+    "Obsolete C++11 standard request" NOTE on Windows.
 
 ## Package description
 

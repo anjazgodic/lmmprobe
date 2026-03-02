@@ -1,6 +1,6 @@
 Package: lmmprobe
 Type: Package
-Title: Sparse High-Dimensional Linear Mixed Modeling with a Partitioned Empirical Bayes ECM Algorithm
+Title: Sparse High-Dimensional Linear Mixed Modeling with a Partitioned Empirical Bayes 'ECM' Algorithm
 Version: 0.1.0
 Date: 2026-02-27
 Authors@R: c(person(given = "Anja",
@@ -23,9 +23,9 @@ Authors@R: c(person(given = "Anja",
                     family = "Olejua",
                     role = "aut",
                     comment = c(ORCID = "0000-0002-2478-0908")))
-Description: Implements a partitioned Empirical Bayes ECM algorithm for sparse
-    high-dimensional linear mixed modeling as described in Zgodic, Bai, Zhang,
-    and McLain (2025) <doi:10.1007/s11222-025-10649-z>. The package provides
+Description: Implements a partitioned Empirical Bayes 'ECM' algorithm for sparse
+    high-dimensional linear mixed modeling as described in 'Zgodic', 'Bai', 'Zhang',
+    and 'McLain' (2025) <doi:10.1007/s11222-025-10649-z>. The package provides
     efficient estimation and inference for mixed models with high-dimensional
     fixed effects.
 License: GPL (>= 2)
