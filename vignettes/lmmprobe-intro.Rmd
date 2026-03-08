@@ -93,5 +93,5 @@ fit <- lmmprobe(
 
 # Inspect results
 print(fit$c_coefs)
-print(head(fit$beta_hat))
+print(head(fit$beta))
 ```

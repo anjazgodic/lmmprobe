@@ -2,11 +2,14 @@
 
 0 errors | 0 warnings | 1 note
 
-* This is a resubmission. Changes from initial submission:
-  - Wrapped acronym 'ECM' and author surnames in single quotes in DESCRIPTION
-    to address "possibly misspelled words" NOTE.
-  - Removed obsolete `CXX_STD = CXX11` from `src/Makevars.win` to address
-    "Obsolete C++11 standard request" NOTE on Windows.
+* This is a resubmission. Changes from previous submission:
+  - Removed single quotes around acronym ECM and author surnames in
+    DESCRIPTION (quotes are only for package/software names).
+  - Expanded ECM acronym to "Expectation Conditional Maximization (ECM)"
+    in the Description field.
+  - Added a small runnable toy example (~0.6 sec) outside `\donttest{}`
+    so that examples are automatically tested. The full SLE data example
+    remains in `\donttest{}` due to runtime (>5 sec).
 
 ## Package description
 
@@ -23,6 +26,11 @@ high-dimensional linear mixed modeling, as described in Zgodic et al. (2025)
   - ubuntu-latest, R oldrel-1
   - macOS-latest (ARM64), R release
   - windows-latest, R release
+* R-hub v2 (all passed):
+  - Linux (Ubuntu, R-devel)
+  - Windows (R-release)
+  - macOS ARM64 (R-release)
+* WinBuilder: R-devel and R-release (0 errors, 0 warnings, 1 note)
 
 ## Notes
 

@@ -1,6 +1,6 @@
 Package: lmmprobe
 Type: Package
-Title: Sparse High-Dimensional Linear Mixed Modeling with a Partitioned Empirical Bayes 'ECM' Algorithm
+Title: Sparse High-Dimensional Linear Mixed Modeling with a Partitioned Empirical Bayes ECM Algorithm
 Version: 0.1.0
 Date: 2026-02-27
 Authors@R: c(person(given = "Anja",
@@ -23,18 +23,18 @@ Authors@R: c(person(given = "Anja",
                     family = "Olejua",
                     role = "aut",
                     comment = c(ORCID = "0000-0002-2478-0908")))
-Description: Implements a partitioned Empirical Bayes 'ECM' algorithm for sparse
-    high-dimensional linear mixed modeling as described in 'Zgodic', 'Bai', 'Zhang',
-    and 'McLain' (2025) <doi:10.1007/s11222-025-10649-z>. The package provides
-    efficient estimation and inference for mixed models with high-dimensional
-    fixed effects.
+Description: Implements a partitioned Empirical Bayes Expectation Conditional
+    Maximization (ECM) algorithm for sparse high-dimensional linear mixed
+    modeling as described in Zgodic, Bai, Zhang, and McLain (2025)
+    <doi:10.1007/s11222-025-10649-z>. The package provides efficient estimation
+    and inference for mixed models with high-dimensional fixed effects.
 License: GPL (>= 2)
 URL: https://github.com/anjazgodic/lmmprobe
 BugReports: https://github.com/anjazgodic/lmmprobe/issues
 Encoding: UTF-8
 RoxygenNote: 7.3.3
 Depends: R (>= 3.5.0)
-Imports: Rcpp (>= 1.0.8.3), tidyr (>= 1.2.0), lme4 (>= 1.1-29), future (>= 1.28.0), future.apply (>= 1.10.0)
+Imports: Rcpp (>= 1.0.8.3), lme4 (>= 1.1-29), future.apply (>= 1.10.0)
 LinkingTo: Rcpp, RcppArmadillo
 Suggests: testthat (>= 3.0.0), knitr, rmarkdown, MASS
 VignetteBuilder: knitr
