@@ -3,7 +3,7 @@ citHeader("To cite lmmprobe in publications use:")
 bibentry(
   bibtype      = "Article",
   title        = "Sparse high-dimensional linear mixed modeling with a partitioned empirical Bayes ECM algorithm",
-  author       = as.person("Anja Zgodic and Ratnan Bai and Jiajia Zhang and Alex C. McLain"),
+  author       = as.person("Anja Zgodic and Ray Bai and Jiajia Zhang and Alex C. McLain"),
   year         = "2025",
   journal      = "Statistics and Computing",
   volume       = "35",

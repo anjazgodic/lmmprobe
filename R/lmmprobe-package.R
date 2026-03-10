@@ -5,7 +5,5 @@
 #' @importFrom utils tail
 #' @importFrom Rcpp evalCpp
 #' @import lme4
-#' @import tidyr
-#' @import future
 #' @useDynLib lmmprobe, .registration=TRUE
 NULL

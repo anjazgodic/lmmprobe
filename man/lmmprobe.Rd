@@ -14,11 +14,11 @@
 
 \item{Y_test}{A testing-data matrix containing the outcome \code{Y}. Default is NULL.}
 
-\item{Z_test}{A training-data matrix containing the sparse fixed-effect predictors on which to apply the lmmprobe algorithm. The first columns should be the "id" column. Default is NULL.}
+\item{Z_test}{A testing-data matrix containing the sparse fixed-effect predictors. Default is NULL.}
 
-\item{V_test}{A training-data matrix containing non-sparse predictors for the random effects. This matrix is currently only programmed for two scenarios. Scenario 1: only a random intercept, where V is a matrix with one column containing ID's and each unit has the same number of observations. Scenario 2: a random intercept and a random slope, where V is a matrix with two columns. The first column is ID and the second column is a continuous variable (e.g. time) for which a random slope is to be estimated. Each unit has the same number of observations. Default is NULL.}
+\item{V_test}{A testing-data matrix containing non-sparse predictors for the random effects, structured the same as \code{V}. Default is NULL.}
 
-\item{ID_test}{A factor vector of IDs for subjects in the testing set.}
+\item{ID_test}{A factor vector of IDs for subjects in the testing set. Default is NULL.}
 
 \item{alpha}{Type I error; significance level.}
 
@@ -39,9 +39,11 @@
 \item{sigma_init}{An initial value for the residual variance parameter. Default is NULL which corresponds to the sample variance of Y.}
 }
 \value{
-A list of the output of the lmmprobe function, including
+A list containing:
 
-\code{beta_hat, beta_hat_var} MAP estimates of the posterior expectation (beta_hat) and variance (beta_hat_var) of the prior mean (\eqn{\beta}) of the regression coefficients assuming \eqn{\gamma=1},
+\code{beta} MAP estimates of the posterior expectation of the prior mean (\eqn{\beta}) of the regression coefficients assuming \eqn{\gamma=1},
+
+\code{beta_var} posterior variance of \eqn{\beta},
 
 \code{gamma} the posterior expectation of the latent \eqn{\gamma} variables,
 
@@ -49,25 +51,41 @@ A list of the output of the lmmprobe function, including
 
 \code{PI_lower, PI_upper} lower and upper prediction intervals for the predictions,
 
-\code{sigma2_est} MAP estimate of the residual variance,
+\code{residual_var} MAP estimate of the residual variance,
 
 \code{random_var} MAP estimate of the random effect(s) variance,
 
 \code{random_intercept} estimated random intercept terms,
 
-\code{random_slope} estimated random slope terms, if applicable.
+\code{random_slope} estimated random slope terms, if applicable,
+
+\code{c_coefs} calibration regression coefficients,
+
+\code{p_vals} p-values for the fixed-effect coefficients,
+
+\code{count} number of iterations until convergence.
 }
 \description{
 Sparse high-dimensional linear mixed modeling with PaRtitiOned empirical Bayes ECM (LMM-PROBE) algorithm. Currently, the package offers functionality for two scenarios. Scenario 1: only a random intercept, each unit has the same number of observations; Scenario 2: a random intercept and a random slope, each unit has the same number of observations. We are actively expanding the package for more flexibility and scenarios.
 }
 \examples{
-library(lmmprobe)
+set.seed(1)
+n_subj <- 10
+n_obs <- 5
+N <- n_subj * n_obs
+Y <- matrix(rnorm(N), ncol = 1)
+Z <- matrix(rnorm(N * 20), nrow = N, ncol = 20)
+V <- matrix(rep(1:n_subj, each = n_obs), ncol = 1)
+ID_data <- rep(1:n_subj, each = n_obs)
+result <- lmmprobe(Y = Y, Z = Z, V = V, ID_data = ID_data, maxit = 3)
+\donttest{
 data(SLE)
 Y <- matrix(real_data[, "y"], ncol = 1)
 Z <- real_data[, 4:ncol(real_data)]
 V <- matrix(real_data[, "id"], ncol = 1)
 ID_data <- as.numeric(as.character(real_data$id))
 full_res <- lmmprobe(Y = Y, Z = Z, V = V, ID_data = ID_data)
+}
 }
 \references{
 Zgodic, A., Bai, R., Zhang, J. et al. (2025). Sparse high-dimensional linear mixed modeling with a partitioned empirical Bayes ECM algorithm. Stat Comput 35, 109. https://doi.org/10.1007/s11222-025-10649-z
